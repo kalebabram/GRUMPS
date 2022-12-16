@@ -80,3 +80,6 @@ $ grumps -m target -t [filepath_to_file_with_target_ids] [filepath_to_dataset]
 ```sh
 $ grumps -m remover -r [filepath_to_file_with_ids_to_remove] [filepath_to_dataset]
 ```
+
+## Example 
+![Screenshot](data/Figure_3.tif)
