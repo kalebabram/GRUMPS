@@ -20,9 +20,10 @@ The easiest way to install **GRUMPS** is using conda to create an environment. U
 1. **Clone this repo and change directories to the local clone**
 2. **Create a conda environment using environment.yml:** `conda env create -f ./environment.yml`
 
-The following command would accomplish the same thing: 
+The following commands would install all dependencies in an existing enivronment: 
   ```sh
-  conda create -n grumps -c conda-forge python=3.7.1 pandas=1.2.4 networkx=2.3 seaborn=0.11.1 scipy=1.6.2 -c r r-essentials=3.6.0 r-sparcl=1.0.4 r-optparse=1.6.2
+  conda install -c conda-forge python pandas networkx seaborn scipy 
+  conda install -c r r-essentials r-sparcl r-optparse
   ```
 3. **Move the contents of ./scripts to the bin folder of the newly created environment:** `mv ./scripts/* ~/.conda/envs/grumps/bin` 
 4. **Test your install by activating the newly created environment and calling `grumps`, `r_grumps`, and `distmat_converter` in help mode:** 
@@ -58,13 +59,13 @@ The optional Rscript `r_grumps` utilizes the following R libraries and versions:
 
 **GRUMPS** has been tested up to the following versions:
 * python 3.11.0
-* pandas
-* networkx
-* seaborn
-* scipy
-* r-essentials
-* r-sparcl
-* r-optparse
+* pandas 1.5.2
+* networkx 2.8.8
+* seaborn 0.12.1
+* scipy 1.9.3
+* r-essentials 3.6
+* r-sparcl 1.0.4
+* r-optparse 1.6.6
 
 Note: Some of these packages are not using the latest available version. As a part of creating the conda package for **GRUMPS**, we are working on updating the dependency versions to ensure **GRUMPS** retains all of its current features. 
 
