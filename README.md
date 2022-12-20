@@ -5,7 +5,7 @@
 
 **GRUMPS** reads a normalized distance matrix and returns a filtered result. It can be run in 'summary', 'regular', 'strict', 'sigma', 'target',
 'clique', and 'small' modes. For more information about these modes please see the white paper:
-doi:1-.--.----
+https://doi.org/10.1101/2022.12.19.521123
 
 
 
