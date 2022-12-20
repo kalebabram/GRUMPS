@@ -25,12 +25,13 @@ The following commands would install all dependencies in an existing enivronment
   conda install -c conda-forge python pandas networkx seaborn scipy 
   conda install -c r r-essentials r-sparcl r-optparse
   ```
-3. **Move the contents of ./scripts to the bin folder of the newly created environment:** `mv ./scripts/* ~/.conda/envs/grumps/bin` 
-4. **Test your install by activating the newly created environment and calling `grumps`, `r_grumps`, and `distmat_converter` in help mode:** 
+3. **Modify the permissions of the contents of ./scripts to allow execution: `chmod +x ./scripts/*`
+4. **Move the contents of ./scripts to the bin folder of the newly created environment:** `mv ./scripts/* ~/.conda/envs/grumps/bin` 
+5. **Test your install by activating the newly created environment and calling `grumps`, `r_grumps`, and `distmat_converter` in help mode:** 
   ```sh
   conda activate grumps ; grumps -h ; r_grumps -h ; distmat_converter -h
   ```
-5. Optional: remove the repository clone directory 
+6. Optional: remove the repository clone directory 
 
 Note: if your conda environments are stored in a different place than ~/.conda/envs, then you will need to modify the mv command above to match where conda envs are located.
 
