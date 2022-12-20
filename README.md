@@ -15,7 +15,7 @@ Currently **GRUMPS** is only available from this repository.
 
 We are in the process of creating a conda package and these instructions will be updated once that is available. 
 
-The easiest way to install **GRUMPS** is using conda to create an environment. Using [mamba](https://mamba.readthedocs.io/en/latest/) can spead up the environment creation process.
+The easiest way to install **GRUMPS** is using conda to create an environment. Using [mamba](https://mamba.readthedocs.io/en/latest/) as a replacement for conda can spead up the environment creation process.
 
 1. **Clone this repo and change directories to the local clone**
 2. **Create a conda environment using environment.yml:** `conda env create -f ./environment.yml`
