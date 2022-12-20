@@ -108,7 +108,7 @@ if __name__ == "__main__":
                '-c' having a higher priority."""
 
     descript = """%(prog)s is a GRUMPS helper script intended to help researchers \
-               quickly modify their data. See the white paper: doi: 10.--.--."""
+               quickly modify their data. See the white paper: https://doi.org/10.1101/2022.12.19.521123"""
                
 
     parser = argparse.ArgumentParser(description=usage, epilog = descript)
