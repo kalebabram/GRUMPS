@@ -335,7 +335,7 @@ if __name__ == "__main__":
                filtered result.   It can be run in 'summary', 'regular', \
                'strict', 'sigma', 'target', 'clique', and 'small' modes. \
                For more information please see the white \
-               paper: doi:1-.--.----"""
+               paper: https://doi.org/10.1101/2022.12.19.521123"""
 
     descript = """%(prog)s is designed to assist and speed up the construction \
                of species level population structures using Mash distances as \
