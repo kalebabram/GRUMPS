@@ -17,13 +17,19 @@ We are in the process of creating a conda package and these instructions will be
 
 The easiest way to install **GRUMPS** is using conda to create an environment. 
 
-* Clone this repo and change directories to the local clone 
-* Create a conda environment using environment.yml: `conda env create -f ./environment.yml`
-  * The following command would accomplish the same thing: `conda create -n grumps -c conda-forge python=3.7.1 pandas=1.2.4 networkx=2.3 seaborn=0.11.1 scipy=1.6.2 -c r r-essentials=3.6.0 r-sparcl=1.0.4 r-optparse=1.6.2`
-* Move the contents of ./scripts to the bin folder of the newly created environment: `mv ./scripts/* ~/.conda/envs/grumps/bin` 
-* Test your install by activating the newly created environment and calling `grumps`, `r_grumps`, and `distmat_converter` in help mode: 
-  * `conda activate grumps ; grumps -h ; r_grumps -h ; distmat_converter -h`
-* Optional: remove the repository clone directory 
+1. **Clone this repo and change directories to the local clone**
+2. **Create a conda environment using environment.yml:** `conda env create -f ./environment.yml`
+
+The following command would accomplish the same thing: 
+  ```sh
+  conda create -n grumps -c conda-forge python=3.7.1 pandas=1.2.4 networkx=2.3 seaborn=0.11.1 scipy=1.6.2 -c r r-essentials=3.6.0 r-sparcl=1.0.4 r-optparse=1.6.2
+  ```
+3. **Move the contents of ./scripts to the bin folder of the newly created environment:** `mv ./scripts/* ~/.conda/envs/grumps/bin` 
+4. **Test your install by activating the newly created environment and calling `grumps`, `r_grumps`, and `distmat_converter` in help mode:** 
+  ```sh
+  conda activate grumps ; grumps -h ; r_grumps -h ; distmat_converter -h
+  ```
+5. Optional: remove the repository clone directory 
 
 Note: if your conda environments are stored in a different place than ~/.conda/envs, then you will need to modify the mv command above to match where conda envs are located.
 
@@ -132,7 +138,7 @@ To address this issue, we will run **GRUMPS** in 'regular' mode with a cutoff of
 
 ### Step 2: Run GRUMPS in 'regular' mode using a cutoff of 0.05 with the optional 'sigma' filtering step and output the clustered heatmap as a png
 ```sh
-$ grumps -m regular -c 0.05 -s yes -p yes -f png -o ward ./data/Staphylococcus_epidermidis.tab_distmat.csv
+grumps -m regular -c 0.05 -s yes -p yes -f png -o ward ./data/Staphylococcus_epidermidis.tab_distmat.csv
 ```
 **Note:** The above step is the equivalent of running `grumps -m regular ./data/Staphylococcus_epidermidis.tab_distmat.csv` as the command line options used in **Step 2** are the same as the default values for these options. 
 
@@ -142,7 +148,7 @@ As the maximum value contained in the clustered heatmap is below 0.05 and the po
 
 ### Step 3: Run GRUMPS in 'summary' mode to obtain an overview of the cleaned dataset
 ```sh
-$ grumps -m summary ./data/Staphylococcus_epidermidis.tab_distmat_cleaned_regular_sigma_0.05_ward_distmat.csv
+grumps -m summary ./data/Staphylococcus_epidermidis.tab_distmat_cleaned_regular_sigma_0.05_ward_distmat.csv
 ```
 In addition to a set of three files summarizing the distribution of values for each genome, the overall dataset, and the means of the dataset, a histogram of all the values in the dataset is also produced by this mode. 
 ![histogram_clean](data/Staphylococcus_epidermidis.tab_distmat_cleaned_regular_sigma_0.05_ward_distmat_summary_histogram.png)
@@ -152,7 +158,7 @@ Now that we have our final cleaned dataset and the summary statistics, we can us
 
 ### Step 4: Run r_grumps to obtain the final clustered heatmap and grouping information
 ```sh
-$ r_grumps -f ./data/Staphylococcus_epidermidis.tab_distmat_cleaned_regular_sigma_0.05_ward_distmat.csv -m heatmap -c 0.0125 -g ward.D2 
+r_grumps -f ./data/Staphylococcus_epidermidis.tab_distmat_cleaned_regular_sigma_0.05_ward_distmat.csv -m heatmap -c 0.0125 -g ward.D2 
 ```
 **Note:** The above step is the equivalent of running `r_grumps -f ./data/Staphylococcus_epidermidis.tab_distmat_cleaned_regular_sigma_0.05_ward_distmat.csv` as the command line options used in **Step 4** are the same as the default values for these options.
 
