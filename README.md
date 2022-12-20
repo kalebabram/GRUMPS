@@ -11,29 +11,54 @@ doi:1-.--.----
 
 ## Installation
 
-Currently **GRUMPS** is only available from this repository. However, we are in the process of creating a conda package and these instructions will be updated once that is available. 
+Currently **GRUMPS** is only available from this repository. 
 
-The easiest installation method using conda to create an environment is described below. However, **GRUMPS** can be deployed in a different manner if all dependencies are met.
+We are in the process of creating a conda package and these instructions will be updated once that is available. 
+
+The easiest way to install **GRUMPS** is using conda to create an environment. 
+
 * Clone this repo and change directories to the local clone 
 * Create a conda environment using environment.yml: `conda env create -f ./environment.yml`
+  * The following command would accomplish the same thing: `conda create -n grumps -c conda-forge python=3.7.1 pandas=1.2.4 networkx=2.3 seaborn=0.11.1 scipy=1.6.2 -c r r-essentials=3.6.0 r-sparcl=1.0.4 r-optparse=1.6.2`
 * Move the contents of ./scripts to the bin folder of the newly created environment: `mv ./scripts/* ~/.conda/envs/grumps/bin` 
-* Test your install by activating the newly created environment and calling **GRUMPS** and `r_grumps` in help mode: `conda activate grumps; grumps -h;r_grumps -h`
+* Test your install by activating the newly created environment and calling `grumps`, `r_grumps`, and `distmat_converter` in help mode: 
+  * `conda activate grumps ; grumps -h ; r_grumps -h ; distmat_converter -h`
 * Optional: remove the repository clone directory 
 
-Note: if your conda environments are stored in a different place than ~/.conda/envs, then you will need to modify the mv command above to where conda envs are located.
+Note: if your conda environments are stored in a different place than ~/.conda/envs, then you will need to modify the mv command above to match where conda envs are located.
 
 ### Dependencies
-**GRUMPS** utilizes the following python libraries and versions:
-* python 3.7.1
-* pandas 1.2.4
-* networkx 2.3
-* seaborn 0.11.1
-* scipy 1.6.2
+**GRUMPS** utilizes the following python libraries:
+* python 3.7.1< 
+* pandas 1.2.4<
+* networkx 2.3<
+* seaborn 0.11.1<
+* scipy 1.6.2<
 
 The optional Rscript `r_grumps` utilizes the following R libraries and versions:
 * r-essentials 3.6.0
 * r-sparcl 1.0.4
 * r-optparse 1.6.2
+
+**GRUMPS** was developed using the following versions:
+* python 3.7.1
+* pandas 1.2.4
+* networkx 2.3
+* seaborn 0.11.1
+* scipy 1.6.2
+* r-essentials 3.6.0
+* r-sparcl 1.0.4
+* r-optparse 1.6.2
+
+**GRUMPS** has been tested up to the following versions:
+* python 3.11.0
+* pandas
+* networkx
+* seaborn
+* scipy
+* r-essentials
+* r-sparcl
+* r-optparse
 
 Note: Some of these packages are not using the latest available version. As a part of creating the conda package for **GRUMPS**, we are working on updating the dependency versions to ensure **GRUMPS** retains all of its current features. 
 
@@ -79,6 +104,16 @@ $ grumps -m target -t [filepath_to_file_with_target_ids] [filepath_to_dataset]
 * **Clean input dataset using 'remover' cleaning mode.** Remove a set of genomes from the input dataset by ID. 
 ```sh
 $ grumps -m remover -r [filepath_to_file_with_ids_to_remove] [filepath_to_dataset]
+```
+
+## Helper Script
+`distmat_converter` reads a regularly delimited file and returns a .csv distance matrix result. By default, the output of `mash dist` can be used by `distmat_converter` to obtain a Mash distance matrix for **GRUMPS**
+```sh
+$ distmat_converter -m mash [filepath_to_mash_output.tab]
+```
+If an ANI delimited file is input please specify with the `-m ani`. If using ANI values, please specify how `distmat_converter` should handle the ANI values with the options `-c yes` or `-i yes`. Note: `-c` or `-i` are conflicting options with `-c` having a higher priority.
+```sh
+$ distmat_converter -m ani -c yes [filpath_to_fastANI_output.tab]
 ```
 
 ## Example 
