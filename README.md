@@ -117,11 +117,16 @@ $ grumps -m remover -r [filepath_to_file_with_ids_to_remove] [filepath_to_datase
 ## Helper Script
 `distmat_converter` reads a regularly delimited file and returns a .csv distance matrix result. By default, the output of `mash dist` can be used by `distmat_converter` to obtain a Mash distance matrix for **GRUMPS**
 ```sh
-$ distmat_converter -m mash [filepath_to_mash_output.tab]
+$ distmat_converter [filepath_to_mash_output.tab]
 ```
-If an ANI delimited file is input please specify with the `-m ani`. If using ANI values, please specify how `distmat_converter` should handle the ANI values with the options `-c yes` or `-i yes`. Note: `-c` or `-i` are conflicting options with `-c` having a higher priority.
+If an ANI delimited file is input, please specify how `distmat_converter` should handle the ANI values with the options `-c yes` or `-i yes`. Note: `-c` or `-i` are conflicting options with `-c` having a higher priority. `-c yes` converts the ANI values to Mash values via (100-ANI)/1. `-i yes` simply inverts ANI values via 100-ANI. 
 ```sh
-$ distmat_converter -m ani -c yes [filpath_to_fastANI_output.tab]
+$ distmat_converter -c yes [filepath_to_fastANI_output.tab]
+```
+
+`medoid_identifier` processes the output of `r_grumps` to rapidly identify the medoids of a given dataset.
+```sh
+$ medoid_identifier [filepath_to_r_grumps_medoid_centers.csv]
 ```
 
 ## Example 
