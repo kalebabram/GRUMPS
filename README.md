@@ -27,13 +27,14 @@ The following commands would install all dependencies in an existing enivronment
   ```
 3. **Modify the permissions of the contents of ./scripts to allow execution: `chmod +x ./scripts/*`
 4. **Move the contents of ./scripts to the bin folder of the newly created environment:** `mv ./scripts/* ~/.conda/envs/grumps/bin` 
+**Note: if your conda environments are stored in a different place than ~/.conda/envs, then you will need to modify the mv command above to match where conda envs are located.**  
 5. **Test your install by activating the newly created environment and calling `grumps`, `r_grumps`, and `distmat_converter` in help mode:** 
   ```sh
   conda activate grumps ; grumps -h ; r_grumps -h ; distmat_converter -h
   ```
 6. Optional: remove the repository clone directory 
 
-**Note: if your conda environments are stored in a different place than ~/.conda/envs, then you will need to modify the mv command above to match where conda envs are located.**
+
 
 ### Dependencies
 **GRUMPS** utilizes the following python libraries:
