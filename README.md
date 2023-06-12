@@ -196,4 +196,4 @@ To assist users in quickly creating publication ready figures from the output of
 The resultant 36cm by 36cm 600 pixels/in figure can then be scaled to the appropriate size depending on the use.
 * If the figure is standalone, scale the image to 18cm by 18cm without interpolation (Image > Scale Image > Interpolation: None)
 * If the figure is going to be a quarter panel, scale the image to 9cm by 9cm without interpolation (Image > Scale Image > Interpolation: None) 
-* If the figure is going to be a quarter panel with other **GRUMPS** generated heatmaps (as done in the **GRUMPS** whitepaper), we recommend scaling the image to 8.75cm by 8.75cm to ensure panels don't look like cramped
+* If the figure is going to be a quarter panel with other **GRUMPS** generated heatmaps (as done in the **GRUMPS** whitepaper), we recommend scaling the image to 8.75cm by 8.75cm to ensure panels don't look cramped
