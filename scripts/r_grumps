@@ -54,9 +54,9 @@ if (opt$mode == 'heatmap'){
   dev.off()
   
   outfile <- paste(strsplit(opt$file, '_distmat.csv')[[1]][1],'_r',out_prefix,'_clust_labels_cutoff_',max(hc_mash$height*opt$cutoff) ,sep = '')
-  write.matrix(clean_group, file = outfile, sep = ',')
-  outfile <- paste(strsplit(opt$file, '_distmat.csv')[[1]][1],'_r',out_prefix,'_clust_groups_cutoff_',max(hc_mash$height*opt$cutoff), sep = '')
   write.matrix(clean_label, file = outfile, sep = ',')
+  outfile <- paste(strsplit(opt$file, '_distmat.csv')[[1]][1],'_r',out_prefix,'_clust_groups_cutoff_',max(hc_mash$height*opt$cutoff), sep = '')
+  write.matrix(clean_group, file = outfile, sep = ',')
   
   if (opt$medoid == 'yes'){
     medoid_centers <- as.matrix(aggregate(mash_df, list(mcl_mash), mean))
@@ -84,9 +84,9 @@ if (opt$mode == 'dendrogram'){
   dev.off()
   
   outfile <- paste(strsplit(opt$file, '_distmat.csv')[[1]][1],'_r',out_prefix,'_clust_labels_cutoff_',max(hc_mash$height*opt$cutoff) ,sep = '')
-  write.matrix(clean_group, file = outfile, sep = ',')
-  outfile <- paste(strsplit(opt$file, '_distmat.csv')[[1]][1],'_r',out_prefix,'_clust_groups_cutoff_',max(hc_mash$height*opt$cutoff), sep = '')
   write.matrix(clean_label, file = outfile, sep = ',')
+  outfile <- paste(strsplit(opt$file, '_distmat.csv')[[1]][1],'_r',out_prefix,'_clust_groups_cutoff_',max(hc_mash$height*opt$cutoff), sep = '')
+  write.matrix(clean_group, file = outfile, sep = ',')
   
   if (opt$medoid == 'yes'){
     medoid_centers <- as.matrix(aggregate(mash_df, list(mcl_mash), mean))
@@ -122,9 +122,9 @@ if (opt$mode == 'general_h'){
   dev.off()
   
   outfile <- paste(strsplit(opt$file, '_distmat.csv')[[1]][1],'_r',out_prefix,'_clust_labels_cutoff_',opt$cutoff ,sep = '')
-  write.matrix(clean_group, file = outfile, sep = ',')
-  outfile <- paste(strsplit(opt$file, '_distmat.csv')[[1]][1],'_r',out_prefix,'_clust_groups_cutoff_',opt$cutoff, sep = '')
   write.matrix(clean_label, file = outfile, sep = ',')
+  outfile <- paste(strsplit(opt$file, '_distmat.csv')[[1]][1],'_r',out_prefix,'_clust_groups_cutoff_',opt$cutoff, sep = '')
+  write.matrix(clean_group, file = outfile, sep = ',')
   
   if (opt$medoid == 'yes'){
     medoid_centers <- as.matrix(aggregate(mash_df, list(mcl_mash), mean))
@@ -152,9 +152,9 @@ if (opt$mode == 'general_d'){
   dev.off()
   
   outfile <- paste(strsplit(opt$file, '.csv')[[1]][1],'_r',out_prefix,'_clust_labels_cutoff_',opt$cutoff ,sep = '')
-  write.matrix(clean_group, file = outfile, sep = ',')
-  outfile <- paste(strsplit(opt$file, '.csv')[[1]][1],'_r',out_prefix,'_clust_groups_cutoff_',opt$cutoff, sep = '')
   write.matrix(clean_label, file = outfile, sep = ',')
+  outfile <- paste(strsplit(opt$file, '.csv')[[1]][1],'_r',out_prefix,'_clust_groups_cutoff_',opt$cutoff, sep = '')
+  write.matrix(clean_group, file = outfile, sep = ',')
 
   if (opt$medoid == 'yes'){
     medoid_centers <- as.matrix(aggregate(mash_df, list(mcl_mash), mean))
