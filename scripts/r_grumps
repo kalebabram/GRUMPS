@@ -9,7 +9,9 @@ option_list = list(
   make_option(c("-c", "--cutoff"), type='double', default = 1.25E-02,
               help = 'Max dist of dendrogram multiplied by this value to make the cuts [default= %default]. \n \t If running in a general mode, this should be user set based on the data.', metavar ='double'),
   make_option(c("-g", "--clusteringmethod"), type="character", default = "ward.D2",
-              help="method to use when making the clustering [default= %default]. \n \t Available methods are: 'ward.D', 'ward.D2', 'single', 'complete', 'average', 'mcquitty', 'median', or 'centroid'", metavar = 'charcter')
+              help="method to use when making the clustering [default= %default]. \n \t Available methods are: 'ward.D', 'ward.D2', 'single', 'complete', 'average', 'mcquitty', 'median', or 'centroid'", metavar = 'charcter'),
+  make_option(c("-d", "--medoid"), type="character", default = "yes",
+              help="output medoid information for a given mode [default= %default]. \n \t Available methods are: 'ward.D', 'ward.D2', 'single', 'complete', 'average', 'mcquitty', 'median', or 'centroid'", metavar = 'charcter')
 ); 
 
 opt_parser = OptionParser(option_list=option_list);
@@ -55,6 +57,12 @@ if (opt$mode == 'heatmap'){
   write.matrix(clean_group, file = outfile, sep = ',')
   outfile <- paste(strsplit(opt$file, '_distmat.csv')[[1]][1],'_r',out_prefix,'_clust_groups_cutoff_',max(hc_mash$height*opt$cutoff), sep = '')
   write.matrix(clean_label, file = outfile, sep = ',')
+  
+  if (opt$medoid == 'yes'){
+    medoid_centers <- as.matrix(aggregate(mash_df, list(mcl_mash), mean))
+    outfile <- paste(strsplit(opt$file, '_distmat.csv')[[1]][1],'_r',out_prefix,'_medoid_centers.csv', sep = '')
+    write.matrix(medoid_centers, file=outfile, sep=',')
+  }
 }
 
 if (opt$mode == 'dendrogram'){
@@ -79,6 +87,12 @@ if (opt$mode == 'dendrogram'){
   write.matrix(clean_group, file = outfile, sep = ',')
   outfile <- paste(strsplit(opt$file, '_distmat.csv')[[1]][1],'_r',out_prefix,'_clust_groups_cutoff_',max(hc_mash$height*opt$cutoff), sep = '')
   write.matrix(clean_label, file = outfile, sep = ',')
+  
+  if (opt$medoid == 'yes'){
+    medoid_centers <- as.matrix(aggregate(mash_df, list(mcl_mash), mean))
+    outfile <- paste(strsplit(opt$file, '_distmat.csv')[[1]][1],'_r',out_prefix,'_medoid_centers.csv', sep = '')
+    write.matrix(medoid_centers, file=outfile, sep=',')
+  }
 }
 
 if (opt$mode == 'general_h'){
@@ -111,6 +125,12 @@ if (opt$mode == 'general_h'){
   write.matrix(clean_group, file = outfile, sep = ',')
   outfile <- paste(strsplit(opt$file, '_distmat.csv')[[1]][1],'_r',out_prefix,'_clust_groups_cutoff_',opt$cutoff, sep = '')
   write.matrix(clean_label, file = outfile, sep = ',')
+  
+  if (opt$medoid == 'yes'){
+    medoid_centers <- as.matrix(aggregate(mash_df, list(mcl_mash), mean))
+    outfile <- paste(strsplit(opt$file, '_distmat.csv')[[1]][1],'_r',out_prefix,'_medoid_centers.csv', sep = '')
+    write.matrix(medoid_centers, file=outfile, sep=',')
+  }
 }
 
 if (opt$mode == 'general_d'){
@@ -135,4 +155,10 @@ if (opt$mode == 'general_d'){
   write.matrix(clean_group, file = outfile, sep = ',')
   outfile <- paste(strsplit(opt$file, '.csv')[[1]][1],'_r',out_prefix,'_clust_groups_cutoff_',opt$cutoff, sep = '')
   write.matrix(clean_label, file = outfile, sep = ',')
+
+  if (opt$medoid == 'yes'){
+    medoid_centers <- as.matrix(aggregate(mash_df, list(mcl_mash), mean))
+    outfile <- paste(strsplit(opt$file, '_distmat.csv')[[1]][1],'_r',out_prefix,'_medoid_centers.csv', sep = '')
+    write.matrix(medoid_centers, file=outfile, sep=',')
+  }
 }

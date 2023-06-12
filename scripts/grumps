@@ -10,8 +10,8 @@ TO DO:
 
 # beginning information
 __author__ = 'Kaleb Abram (abram.kaleb@gmail.com)'
-__version__ = '0.9'
-__date__ = 'December 20, 2022'
+__version__ = '0.9.2'
+__date__ = 'June 7, 2023'
 
 # libraries
 import pandas as pd
@@ -178,7 +178,7 @@ to small [grumps -m small ...]')
         meanStat = dfStat['mean'].describe(percentiles = [.003,.1,.25,.5,.75,.9,.997])
         print('The means of your data are described below:')
         print(meanStat)
-        specificStat = pd.Series(np.concatenate((np.array([np.shape(self.distMat)[0],np.mean(self.distMat.values),np.std(self.distMat.values)]),np.percentile(self.distMat.values,[.3,10,25,50,75,90,99.7]),np.max(self.distMat.values)), axis = None),index = ['count', 'mean', 'std',' 0.3%', '10%', '25%', '50%', '75%', '90%', '99.7%', 'max'])
+        specificStat = pd.Series(np.concatenate((np.array([np.shape(self.distMat)[0],np.mean(self.distMat.values),np.std(self.distMat.values)]),np.percentile(self.distMat.values,[.3,10,25,50,75,90,99.7]),np.max(self.distMat.values)), axis = None),index = ['count', 'mean', 'std','0.3%', '10%', '25%', '50%', '75%', '90%', '99.7%', 'max'])
         try:
             outfp = self.mashFile.split('.csv')[0] + '_genome_summary_table.csv'
         except:

@@ -7,13 +7,8 @@ Created on Mon Apr 13 11:08:06 2020
 """
 # begining information
 __author__ = 'Kaleb Abram (abram.kaleb@gmail.com)'
-__version__ = '0.9'
-__date__ = 'December 19, 2022'
-
-
-# libraries
-import pandas as pd
-
+__version__ = '1.0'
+__date__ = 'June 9, 2023'
 
 class outputConverter(object):
     """
@@ -33,82 +28,166 @@ class outputConverter(object):
                   An error has occurred.")
             raise FileNotFoundError("The file name or filepath is incorrect. \
 Please double check the filepath or file name.") from e
-            
+
         # store empty versions of final data in object at object creation    
         self.delimiter = '\t'
-        self.mode = 'mash'
         self.trimOpt = 'yes'
-        self.convertANI = 'yes'
-        self.invertANI = 'yes'
-        self.distmat = ''
+        self.convertANI = 'no'
+        self.invertANI = 'no'
+        self.header = []
+        self.refPos = ''
     
-    # function to parse the input file from Mash into a dictionary and convert it to a dataframe
-    def mashParser(self,):
-        dicty = {}
+    # function to determine which position is reference
+    def refFinder(self,):
+        pos_0 = []
+        pos_1 = []
+        i=1
         with open(self.inFile, 'r') as fp:
             for line in fp:
-                split = line.split(self.delimiter)
-                if self.trimOpt == 'yes':
-                    g1 = split[1].rsplit('/')[-1]
-                    g2 = split[0].rsplit('/')[-1]
-                else:
-                    g1 = split[1]
-                    g2 = split[0]
-                distance = split[2]
-                if g1 not in dicty.keys():
-                    dicty[g1] = [distance]
-                else:
-                    dicty[g1].append(distance)
-        distmat = pd.DataFrame.from_dict(dicty, orient = 'index')
-        distmat.columns = distmat.index
-        return distmat
+                while i < 3:
+                    split = line.split('\n')[0].split(self.delimiter)
+                    pos_0.append(split[0])
+                    pos_1.append(split[1])
+                    i+=1
+        if pos_0[0] == pos_0[1]:
+            self.refPos = 'pos_0'
+        if pos_1[0] == pos_1[1]:
+            self.refPos = 'pos_1'
 
-    # function to parse the input file from FastANI into a dictionary and convert it to a dataframe
-    def aniParser(self,):
-        g1List = []
-        g2List = []
-        distList = []
+    # function to create the header
+    def headerBuilder(self,):
+        i=1
+        currentRef = ''
+        previousRef = ''
         with open(self.inFile, 'r') as fp:
             for line in fp:
-                split = line.split(self.delimiter)
-                if self.trimOpt == 'yes':
-                    g1 = split[0].rsplit('/')[-1]
-                    g2 = split[1].rsplit('/')[-1]
-                else:
-                    g1 = split[0]
-                    g2 = split[1]
-                distance = split[2]
-                g1List.append(g1)
-                g2List.append(g2)
-                distList.append(distance)
-        unpivDF = pd.DataFrame()
-        unpivDF['g1'] = g1List
-        unpivDF['g2'] = g2List   
-        unpivDF['distance'] = distList
-        if self.convertANI == 'yes':
-            unpivDF['distance'] = round(1-(unpivDF['distance'].astype(float)/100),6)
-        else:
+                split = line.split('\n')[0].split(self.delimiter)
+                if self.refPos == 'pos_0':
+                    if i == 1:
+                        currentRef = split[0]
+                        self.header.append(split[1])
+                        i+=1
+                    else:
+                        previousRef = currentRef
+                        currentRef = split[0]
+                        if currentRef != previousRef:
+                            break
+                        else:
+                            self.header.append(split[1])
+                if self.refPos == 'pos_1':
+                    if i ==1:
+                        currentRef = split[1]
+                        self.header.append(split[0])
+                        i+=1
+                    else:
+                        previousRef = currentRef
+                        currentRef = split[1]
+                        if currentRef != previousRef:
+                            break
+                        else:
+                            self.header.append(split[0])
+        if self.trimOpt == 'yes':
+            self.header = [x.rsplit('/')[-1] for x in self.header]
+
+    # function to create the output
+    def outputMaker(self,):
+        currentRef = ''
+        previousRef = ''
+        loopDist = []
+        loopID = []
+        fileLines = ''
+        i=1
+        try:
+            outFP = self.inFile.rsplit('.',1)[0] + '_distmat.csv'
+        except:
+            outFP = self.inFile+ '_distmat.csv'
+        outFile = open(outFP, 'w')
+        outFile.write(','.join(self.header) + '\n')
+        with open(self.inFile, 'r') as fp:
+            for line in fp:
+                split = line.split('\n')[0].split(self.delimiter)
+                if self.refPos == 'pos_0':
+                    if i == 1:
+                        currentRef = split[0]
+                        if self.trimOpt == 'yes':
+                            loopID.append(split[0].rsplit('/')[-1])
+                        else:
+                            loopID.append(split[0])
+                        loopDist.append(split[2])
+                        i+=1
+                    else:
+                        previousRef = currentRef
+                        currentRef = split[0]
+                        if currentRef != previousRef:
+                            if self.convertANI == 'yes':
+                                fileLines = ','.join(loopID + [str(round((1-float(x))/100,6)) for x in loopDist])
+                            if self.invertANI == 'yes':
+                                fileLines = ','.join(loopID + [str(round(100-float(x),6)) for x in loopDist])
+                            else:
+                                fileLines = ','.join(loopID + loopDist)
+                            outFile.write(fileLines + '\n')
+                            loopDist = []
+                            loopID = []
+                            fileLines = ''
+                            if self.trimOpt == 'yes':
+                                loopID.append(split[0].rsplit('/')[-1])
+                            else:
+                                loopID.append(split[0])
+                            loopDist.append(split[2])
+                        else:
+                            loopDist.append(split[2])
+                if self.refPos == 'pos_1':
+                    if i == 1:
+                        currentRef = split[1]
+                        if self.trimOpt == 'yes':
+                            loopID.append(split[1].rsplit('/')[-1])
+                        else:
+                            loopID.append(split[1])
+                        loopDist.append(split[2])
+                        i+=1
+                    else:
+                        previousRef = currentRef
+                        currentRef = split[1]
+                        if currentRef != previousRef:
+                            if self.convertANI == 'yes':
+                                fileLines = ','.join(loopID + [str(round((1-float(x))/100,6)) for x in loopDist])
+                            if self.invertANI == 'yes':
+                                fileLines = ','.join(loopID + [str(round(100-float(x),6)) for x in loopDist])
+                            else:
+                                fileLines = ','.join(loopID + loopDist)
+                            outFile.write(fileLines + '\n')
+                            fileLines = ''
+                            loopDist = []
+                            loopID = []
+                            if self.trimOpt == 'yes':
+                                loopID.append(split[1].rsplit('/')[-1])
+                            else:
+                                loopID.append(split[1])
+                            loopDist.append(split[2])
+                        else:
+                            loopDist.append(split[2])
+            if self.convertANI == 'yes':
+                fileLines = ','.join(loopID + [str(round((1-float(x))/100,6)) for x in loopDist])
             if self.invertANI == 'yes':
-                unpivDF['distance'] = round(100-unpivDF['distance'].astype(float),6)
-        distmat = unpivDF.pivot(index = 'g2', columns = 'g1', values = 'distance')
-        distmat.rename_axis('', axis = 'index', inplace = True)
-        return distmat                
+                fileLines = ','.join(loopID + [str(round(100-float(x),6)) for x in loopDist])
+            else:
+                fileLines = ','.join(loopID + loopDist)
+            outFile.write(fileLines)
+            outFile.close()
 
-##########
 
-
+###########
 # Module test
 if __name__ == "__main__":
     import argparse
     usage = """%(prog)s reads a regularly delimited file and returns a .csv \
-               distance matrix result. If an ANI table is input please specify \
-               with the '-m ani'. If using ANI values, please specify \
+               distance matrix result. If using ANI values, please specify \
                how %(prog)s should handle the ANI values with the options '-c yes' or \
                '-i yes'. Note: '-c' or '-i' are conflicting options with \
                '-c' having a higher priority."""
 
     descript = """%(prog)s is a GRUMPS helper script intended to help researchers \
-               quickly modify their data. See the white paper: https://doi.org/10.1101/2022.12.19.521123"""
+               quickly modify their data. See the white paper: doi: 10.--.--."""
                
 
     parser = argparse.ArgumentParser(description=usage, epilog = descript)
@@ -117,11 +196,6 @@ if __name__ == "__main__":
                         with a genome ID for each pairwise comparision in two \
                         columns and the 'distance' in the thrid column\
                         ", type=str)
-    parser.add_argument("-m", "--mode", dest="mode",
-                        help="Specify if using 'mash' or 'ani' values. \
-                        [default: 'mash']", 
-                        type=str, default = 'mash', 
-                        choices = ['mash', 'ani'])
     parser.add_argument("-d", "--delimiter", dest="delimiter",
                         help="If delimiter is not tab, specify. [default: '\t']\
                         ", type=str, default = '\t')
@@ -133,8 +207,8 @@ if __name__ == "__main__":
     parser.add_argument("-c", "--convertani", dest = "convertANI",
                         help="Specify if ANI values should be \
                         converted into Mash distances using \
-                        1-(ANI/100). [default: 'yes']\
-                        ", type=str, default = 'yes', choices = ['yes', 'no'])
+                        1-(ANI/100). [default: 'no']\
+                        ", type=str, default = 'no', choices = ['yes', 'no'])
     parser.add_argument("-i", "--invertani", dest = "invertANI",
                         help="Specify if ANI values should be inverted \
                         for using ANI values with GRUMPS. \
@@ -147,18 +221,18 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     filepath = args.filepath
-    mode = args.mode
     delimiter = args.delimiter
     trimOpt = args.trimOpt
     convertANI = args.convertANI
     invertANI = args.invertANI
 
+    if convertANI == 'yes':
+        invertANI == 'no'
+
     distmatConverter = outputConverter(filepath)
 
     if args.delimiter:
         distmatConverter.delimiter = delimiter
-    if args.mode:
-        distmatConverter.mode = mode
     if args.trimOpt:
         distmatConverter.trimOpt = trimOpt
     if args.convertANI:
@@ -166,22 +240,13 @@ if __name__ == "__main__":
     if args.invertANI:
         distmatConverter.invertANI = invertANI
 
-    # run in Mash mode
-    if args.mode == 'mash':
-        distmatConverter.distmat = distmatConverter.mashParser()
+    # run refFinder to find reference position
+    distmatConverter.refFinder()
 
-    # run in ANI mode
-    if args.mode == 'ani':
-        distmatConverter.distmat = distmatConverter.aniParser()
+    # run headerBuilder to build header
+    distmatConverter.headerBuilder()
 
-    # create outfp
-    try:
-        outfp = distmatConverter.inFile.rsplit('.',1)[0] + '_distmat.csv'
-    except:
-        outfp = distmatConverter.inFile + '_distmat.csv'
+    # write the output
+    distmatConverter.outputMaker()
 
-    # write out the distmat
-    distmatConverter.distmat.to_csv(outfp)
 
-    
-###########
