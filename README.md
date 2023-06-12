@@ -33,7 +33,7 @@ The following commands would install all dependencies in an existing enivronment
   ```
 6. Optional: remove the repository clone directory 
 
-Note: if your conda environments are stored in a different place than ~/.conda/envs, then you will need to modify the mv command above to match where conda envs are located.
+**Note: if your conda environments are stored in a different place than ~/.conda/envs, then you will need to modify the mv command above to match where conda envs are located.**
 
 ### Dependencies
 **GRUMPS** utilizes the following python libraries:
