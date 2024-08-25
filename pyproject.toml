@@ -1,0 +1,101 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "grumps"
+description = "Genomic distance based Rapid Uncovering of Microbial Population Structures"
+authors = [
+    {name = "Kaleb Abram", email = "abram.kaleb@gmail.com"},
+]
+maintainers = [
+    {name = "Kaleb Abram", email = "abram.kaleb@gmail.com"},
+]
+
+requires-python = ">=3.7"
+dependencies = [
+    "scikit-learn",
+    "scipy",
+    "seaborn",
+    "pandas",
+    "numpy",
+    "pandas",
+    "networkx",
+]
+
+dynamic = ["version"]
+readme = "README.md"
+license = {file = "LICENSE"}
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: MacOS :: MacOS X",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+keywords = [
+    "genome",
+    "assembly",
+    "clustering",
+    "population structure",
+    "ANI",
+    "mash",
+    "machine learning",
+    "data cleaning",
+]
+
+[project.urls]
+Homepage = "https://github.com/kalebabram/grumps"
+News = "https://github.com/kalebabram/grumps/blob/master/CHANGELOG.md"
+Readme = "https://github.com/kalebabram/grumps/blob/master/README.md"
+
+[project.scripts]
+grumps = "grumps.core.cli2:cli"
+distmat_converter = "grumps.core.distmat_converter:main"
+
+
+
+# pyproject.toml documentation:
+# https://peps.python.org/pep-0621/
+# https://hatch.pypa.io/latest/config/metadata/
+# https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html
+# https://python-poetry.org/docs/pyproject/
+
+
+[tool.hatch.version]
+path = "src/grumps/__about__.py"
+
+#[tool.hatch.build.targets.sdist]
+#include = [
+#    "src"
+#]
+
+#[tool.hatch.build.targets.wheel]
+#packages = [
+#    "src"
+#]
+
+# # include other files
+# [tool.hatch.build.force-include]
+# "LICENSE" = "grumps/LICENSE"
+# "README.md" = "grumps/README.md"
+# "CHANGELOG.md" = "grumps/CHANGELOG.md"
+
+#[tool.isort]
+#profile = "black"
+#conda_env = "environment.yml"
+#overwrite_in_place = true
+
+#[tool.flakeheaven]
+#max_line_length = 88
+#show_source = true
+
+#[tool.flakeheaven.plugins]
+#flake8-bugbear = ["+*"]
+#pycodestyle = ["+*", "-E501", "-W503"]
+#pyflakes = ["+*"]
+#pylint = ["+*"]

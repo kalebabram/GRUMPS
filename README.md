@@ -11,9 +11,7 @@ https://doi.org/10.1101/2022.12.19.521123
 
 ## Installation
 
-Currently **GRUMPS** is only available from this repository. 
-
-We are in the process of creating a conda package and these instructions will be updated once that is available. 
+**GRUMPS** is installable from pip, conda or from this repository. Note the pip version does not have the R dependecies needed for **r_grumps**. The best installation option for **GRUMPS** is conda. 
 
 The easiest way to install **GRUMPS** is using conda to create an environment. Using [mamba](https://mamba.readthedocs.io/en/latest/) as a replacement for conda can spead up the environment creation process.
 
