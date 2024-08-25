@@ -3,11 +3,28 @@ channels:
   - conda-forge
   - r
 dependencies:
-  - python=3.7.1
+  - python
   - networkx
   - pandas
   - scipy
   - seaborn
+  - scikit-learn
   - r-essentials=3.6.0
   - r-optparse
   - r-sparcl
+
+    # Distribution
+  - python-build
+  - twine ==3.3.0
+  - keyring ==22.3.0
+
+  # Testing
+  - autoflake ==1.4
+  - black ==22.6.0
+  - flake8 ==4.0.1
+  - flake8-bugbear ==22.7.1
+  - flakeheaven ==2.0.0
+  - isort ==5.10.1
+  - pytest
+  - pytest-rerunfailures
+  - pytest-cov
