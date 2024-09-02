@@ -51,7 +51,7 @@ R -e 'devtools::install_github("kalebabram/r_grumps")'
 ```
 Note: to install the R version from GitHub, the library "devtools" is required: `install.packages('devtools')` or `conda install r-devtools`
 
-#### from source
+#### Source
 All neccessary files needed to build the python package of **GRUMPS** are found in `src/grumps` within this repository.
 
 All neccessary files needed to build the R package of **GRUMPS** are found in the r_grumps repository: https://github.com/kalebabram/r_grumps.git
