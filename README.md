@@ -49,7 +49,7 @@ Note: the pip version does not have the R dependecies needed for **r-grumps**.
 ```sh
 R -e 'devtools::install_github("kalebabram/r_grumps")'
 ```
-Note: to install the R version from GitHub, the library "devtools" is required: `install.packages('devtools')` or `conda install r-devtools`
+Note: R library "devtools" is required: `install.packages('devtools')` or `conda install r-devtools` for this approach. To get the CLI entrypoint, download `cligrumps.R` from the repository. You can rename the Rscript to `r-grumps` and relocate it to a directory in your $PATH. 
 
 #### Source
 All neccessary files needed to build the python package of **GRUMPS** are found in `src/grumps` within this repository.
@@ -58,20 +58,100 @@ All neccessary files needed to build the R package of **GRUMPS** are found in th
 
 In order to get the CLI entrypoint for the R package, simply download the Rscript `cligrumps.R` to your computer. You can rename the Rscript to `r-grumps` and relocate it to a directory in your $PATH. 
 
-### Dependencies
+## Dependencies
 **GRUMPS** utilizes the following python libraries:
-* python 3.7.1< 
-* pandas 1.2.4<
-* networkx 2.3<
-* seaborn 0.11.1<
-* scipy 1.6.2<
+* python 
+* pandas
+* networkx
+* seaborn
+* scipy
 * scikit-learn
 
-The optional Rscript `r_grumps` utilizes the following R libraries and versions:
-* r-essentials 3.6.0
-* r-optparse 1.6.2
-* r-ape
-* r-devtools
+`r-grumps` utilizes the following R libraries:
+* MASS
+* optparse
+* ape
+* grDevices
+* RColorBrewer
+* sparcl
+* stats
+* utils
+
+## **GRUMPS** library support
+### python
+**GRUMPS** also is available as a python library to allow easy integration into existing python based workflows.
+
+While **GRUMPS** has many components, the following overview summarizes functions which users are intended to interact with:
+
+`grumps`
+  * `api`
+    * `pipeLine` - a function which runs the entire **GRUMPS** pipeline with the specified parameters (same defaults as CLI version are used)   
+  * `modes`
+    * `regularMode` - a function which executes the 'regular' or 'strict' cleaning modes of **GRUMPS** based on specified parameters
+    * `removerMode` - a function which executes the 'remover' cleaning mode of **GRUMPS** based on specified parameters
+    * `targetMode` - a function which executes the 'target' cleaning mode of **GRUMPS** based on specified parameters
+    * `smallMode` - a function which executes the 'small' cleaning mode of **GRUMPS** based on specified parameters
+    * `sigmaMode` - a function which executes the 'sigma' cleaning mode of **GRUMPS** based on specified parameters
+    * `summaryMode` - a function which executes the 'summary' cleaning mode of **GRUMPS** 
+    * `cliqueMode` - a function which executes the 'remover' cleaning mode of **GRUMPS** based on specified parameters
+
+The intended use of the python **GRUMPS** library is as follows:
+```py
+import grumps.api as grumps
+data = grumps.grumpsObj('/path/to/distmat/file.csv')
+# change these grumpsObj defaults or the cleaning modes/pipeline will run with defaults
+data.mode = 'regular'
+data.cutOff = 0.05
+data.clusterMethod = 'ward'
+data.makeHeatmap = 'yes'
+data.figFormat = 'png'
+data.targetFilePath = ''
+data.removeFilePath = ''
+data.sigma = 'yes'
+data.medoid = 'yes'
+# if you want to run grumps automatically
+grumps.pipeLine(data)
+# if you want to use a specific cleaning mode
+data = grumps.regularMode(data)
+```
+
+### R
+**GRUMPS** also has an R library available. 
+```R
+library(rgrumps)
+# change filepath to path of the distance matrix
+# change mode to one of the following: 'heatmap', 'dendrogram', or 'general'
+grumps <- grumpsFunc(filepath='', mode = '', cutoff = 1.25E-02, clusteringmethod = 'ward.D2', tree = 'yes')
+grumps = dataframeFunc(grumps)
+grumps = clusterFunc(grumps)
+if (grumps$mode == 'heatmap'){
+  grumps= mclFunc(grumps)
+  heatmapFunc(grumps)
+  labeloutFunc(grumps)
+  dendrogramFunc(grumps)
+  if (grumps$tree == 'yes'){
+    treeFunc(grumps)
+  }
+}
+
+if (grumps$mode == 'dendrogram'){
+  grumps = mclFunc(grumps)
+  labeloutFunc(grumps)
+  dendrogramFunc(grumps)
+  if (grumps$tree == 'yes'){
+    treeFunc(grumps)
+  }
+}
+
+if (grumps$mode == 'general'){
+  heatmapFunc(grumps)
+  grumps = heightCutter(grumps)
+  dendrogramFunc(grumps)
+  if (grumps$tree == 'yes'){
+    treeFunc(grumps)
+  }  
+}
+```
 
 ## Usage Summary
 
