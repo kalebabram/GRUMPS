@@ -4,35 +4,59 @@
 **GRUMPS** is designed to assist and speed up the construction of species level population structures using Mash distances as an input. ANI values can be used as well if the ANI values are converted to a decimal difference value {i.e. (100 - ANIvalue) /100}. Additional helper scripts are provided if you do not have a correctly formatted distance matrix to input.
 
 **GRUMPS** reads a normalized distance matrix and returns a filtered result. It can be run in 'summary', 'regular', 'strict', 'sigma', 'target',
-'clique', and 'small' modes. For more information about these modes please see the white paper:
+'clique', and 'small' modes. 
+
+For more information about these modes please see the white paper:
 https://doi.org/10.1101/2022.12.19.521123
 
 
 
 ## Installation
 
-**GRUMPS** is installable from pip, conda or from this repository. Note the pip version does not have the R dependecies needed for **r_grumps**. The best installation option for **GRUMPS** is conda. 
+**GRUMPS** is installable from conda, pip or from source. 
 
-The easiest way to install **GRUMPS** is using conda to create an environment. Using [mamba](https://mamba.readthedocs.io/en/latest/) as a replacement for conda can spead up the environment creation process.
+The best installation option for **GRUMPS** is conda within a new environment. 
 
-1. **Clone this repo and change directories to the local clone**
-2. **Create a conda environment using environment.yml:** `conda env create -f ./environment.yml`
+### Installing from conda
+#### Creating a new environment
+```sh
+conda env create -n grumps_env kabram::grumps
+```
+Note: using [mamba](https://mamba.readthedocs.io/en/latest/) as a replacement for conda can spead up the environment creation process.
 
-The following commands would install all dependencies in an existing enivronment: 
-  ```sh
-  conda install -c conda-forge python pandas networkx seaborn scipy 
-  conda install -c r r-essentials r-sparcl r-optparse
-  ```
-3. **Modify the permissions of the contents of ./scripts to allow execution: `chmod +x ./scripts/*`
-4. **Move the contents of ./scripts to the bin folder of the newly created environment:** `mv ./scripts/* ~/.conda/envs/grumps/bin` 
-**Note:** if your conda environments are stored in a different place than `~/.conda/envs`, then you will need to modify the mv command above to match where conda envs are located.
-5. **Test your install by activating the newly created environment and calling `grumps`, `r_grumps`, and `distmat_converter` in help mode:** 
-  ```sh
-  conda activate grumps ; grumps -h ; r_grumps -h ; distmat_converter -h
-  ```
-6. Optional: remove the repository clone directory 
+#### Installing into existing environment
+```sh
+conda install kabram::grumps
+```
+**GRUMPS** has two components in the conda package: py-grumps and r-grumps. Each component is a conda package which contains all necessary dependencies for that component. 
 
+To install the python component:
+```sh
+conda install kabram::py-grumps
+```
+To install the R component:
+```sh
+conda install kabram::r-grumps
+```
+### Installing from other sources
+#### pip
+```sh
+pip install grumps
+```
+Note: the pip version does not have the R dependecies needed for **r-grumps**. 
 
+#### r-devtools
+```sh
+R -e 'devtools::install_github("kalebabram/r_grumps")'
+```
+Note: to install the R version from GitHub, the library "devtools" is required: `install.packages('devtools')` or `conda install r-devtools`
+
+#### from source
+All neccessary files needed to build the python package of **GRUMPS** are found in `src/grumps` within this repository.
+
+All neccessary files needed to build the R package of **GRUMPS** are found in the r_grumps repository: https://github.com/kalebabram/r_grumps.git
+
+In order to get the CLI entrypoint for the R package, simply download the Rscript `cligrumps.R` to your computer. You can rename the Rscript to `r-grumps` and relocate it to a directory in your $PATH. 
 
 ### Dependencies
 **GRUMPS** utilizes the following python libraries:
@@ -41,33 +65,13 @@ The following commands would install all dependencies in an existing enivronment
 * networkx 2.3<
 * seaborn 0.11.1<
 * scipy 1.6.2<
+* scikit-learn
 
 The optional Rscript `r_grumps` utilizes the following R libraries and versions:
 * r-essentials 3.6.0
-* r-sparcl 1.0.4
 * r-optparse 1.6.2
-
-**GRUMPS** was developed using the following versions:
-* python 3.7.1
-* pandas 1.2.4
-* networkx 2.3
-* seaborn 0.11.1
-* scipy 1.6.2
-* r-essentials 3.6.0
-* r-sparcl 1.0.4
-* r-optparse 1.6.2
-
-**GRUMPS** has been tested up to the following versions:
-* python 3.11.0
-* pandas 1.5.2
-* networkx 2.8.8
-* seaborn 0.12.1
-* scipy 1.9.3
-* r-essentials 3.6
-* r-sparcl 1.0.4
-* r-optparse 1.6.6
-
-Note: Some of these packages are not using the latest available version. As a part of creating the conda package for **GRUMPS**, we are working on updating the dependency versions to ensure **GRUMPS** retains all of its current features. 
+* r-ape
+* r-devtools
 
 ## Usage Summary
 
@@ -121,11 +125,6 @@ $ distmat_converter [filepath_to_mash_output.tab]
 If an ANI delimited file is input, please specify how `distmat_converter` should handle the ANI values with the options `-c yes` or `-i yes`. Note: `-c` or `-i` are conflicting options with `-c` having a higher priority. `-c yes` converts the ANI values to Mash values via (100-ANI)/1. `-i yes` simply inverts ANI values via 100-ANI. 
 ```sh
 $ distmat_converter -c yes [filepath_to_fastANI_output.tab]
-```
-
-`medoid_identifier` processes the output of `r_grumps` to rapidly identify the medoids of a given dataset.
-```sh
-$ medoid_identifier [filepath_to_r_grumps_medoid_centers.csv]
 ```
 
 ## Example 
