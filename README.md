@@ -28,7 +28,7 @@ Note: using [mamba](https://mamba.readthedocs.io/en/latest/) as a replacement fo
 ```sh
 conda install kabram::grumps
 ```
-**GRUMPS** has two components in the conda package: py-grumps and r-grumps. Each component is a conda package which contains all necessary dependencies for that component. 
+**GRUMPS** has two components in the conda package: `py-grumps` and `r-grumps`. Each component is a conda package which contains all necessary dependencies for that component. 
 
 To install the python component:
 ```sh
