@@ -9,49 +9,45 @@ source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: d0c3b1530ed2cf32f2fcbdcec62d7aff3a4ced4671ccf2c3bc58a149f45edf71
 
+
 build:
-  script: "{{ PYTHON }} -m pip install . -vv --no-build-isolation --no-deps"
   number: 0
   rpaths:
     - lib/R/lib/
     - lib/
-  script: "\"%R%\" -e \"devtools::install_github('kalebabram/r_grumps')\" --vanilla"
 
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
 
 requirements:
-  host:
+  build:
     - python >=3.7
+    - wget
     - hatchling
     - pip
-    - r-essentials
+    - r-essentials 
     - r-devtools
     - r-ape
-    - r-sparcl
-    - r-MASS
-    - r-optparse
+    - r-optparse 
   run:
-    - python >=3.7
+    - python 
     - scikit-learn
     - scipy
-    - seaborn
-    - pandas
-    - numpy
-    - networkx
-    - r-essentials
+    - seaborn 
+    - pandas 
+    - numpy 
+    - networkx 
+    - r-essentials 
     - r-ape
-    - r-sparcl
-    - r-MASS
     - r-optparse
 test:
   imports:
     - grumps
   commands:
-    - pip check
     - grumps --help
     - distmat_converter --help
-    - "\"%R%\" -e \"library('rgrumps')\""
-  requires:
-    - pip
+    - r-grumps -h 
 
 about:
   summary: Genomic distance based Rapid Uncovering of Microbial Population Structures
@@ -61,5 +57,3 @@ about:
 extra:
   recipe-maintainers:
     - kalebabram
-
-
