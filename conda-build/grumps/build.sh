@@ -9,8 +9,7 @@
 # https://github.com/jeroen/autobrew/issues/3
 export DISABLE_AUTOBREW=1
 ${PYTHON} -m pip install . -vv --no-build-isolation --no-deps
-R -e 'devtools::install_github("kalebabram/r_grumps")' 
+R -e 'devtools::install_github("kalebabram/r-grumps")' 
 mkdir -p ${PREFIX}/bin
-wget https://raw.githubusercontent.com/kalebabram/r_grumps/main/cligrumps.R -O ${PREFIX}/bin/r-grumps
-#wget https://raw.githubusercontent.com/kalebabram/r_grumps/main/rgrumps -O ${PREFIX}/bin/r-grumps
+wget https://raw.githubusercontent.com/kalebabram/r-grumps/main/cligrumps.R -O ${PREFIX}/bin/r-grumps
 chmod +x ${PREFIX}/bin/r-grumps
