@@ -24,7 +24,7 @@ requirements:
     - r-optparse
 test:
   commands:
-    - r-grumps -h 
+    - r-grumps --help
 
 about:
   summary: Genomic distance based Rapid Uncovering of Microbial Population Structures
