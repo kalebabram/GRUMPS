@@ -49,14 +49,14 @@ Note: the pip version does not have the R dependecies needed for **r-grumps**.
 ```sh
 R -e 'devtools::install_github("kalebabram/r_grumps")'
 ```
-Note: R library "devtools" is required: `install.packages('devtools')` or `conda install r-devtools` for this approach. To get the CLI entrypoint, download `cligrumps.R` from the repository. You can rename the Rscript to `r-grumps` and relocate it to a directory in your $PATH. 
+Note: R library "devtools" is required: `install.packages('devtools')` or `conda install r-devtools` for this approach. To get the CLI entrypoint, download `cligrumps.R` from the repository. You can rename the Rscript to `r-grumps`, relocate it to a directory in your $PATH, and make it executable for equivalent behavior to the conda install of `r-grumps`. 
 
 #### Source
 All neccessary files needed to build the python package of **GRUMPS** are found in `src/grumps` within this repository.
 
 All neccessary files needed to build the R package of **GRUMPS** are found in the r_grumps repository: https://github.com/kalebabram/r_grumps.git
 
-In order to get the CLI entrypoint for the R package, simply download the Rscript `cligrumps.R` to your computer. You can rename the Rscript to `r-grumps` and relocate it to a directory in your $PATH. 
+In order to get the CLI entrypoint for the R package, simply download the Rscript `cligrumps.R` to your computer. You can rename the Rscript to `r-grumps`, relocate it to a directory in your $PATH, and make it executable for equivalent behavior to the conda install of `r-grumps`. 
 
 ## Dependencies
 **GRUMPS** utilizes the following python libraries:
@@ -154,7 +154,7 @@ if (grumps$mode == 'general'){
 ```
 
 ## Usage Summary
-
+### **GRUMPS**
 The following section provides a set of minimal command line commands to use **GRUMPS**. Please use the help page, `grumps -h`, to see all command line options and what modes these options can be used with.  
 
 * **Produce help page.** Quickly check the software usage and available command line options.
@@ -206,7 +206,34 @@ If an ANI delimited file is input, please specify how `distmat_converter` should
 ```sh
 distmat_converter -c yes [filepath_to_fastANI_output.tab]
 ```
+### `r-grumps`
+The following section provides an overview of the command line component of `r-grumps`. Please use the help page, `r-grumps -h`, to see all command line options and what modes these options can be used with. 
 
+Note: all modes print the height used to cut the clustered dendrogram and produce clusters (this information is also found in the filenames output by `r-grumps`). 
+
+* **Produce help page.** Quickly check the software usage and available command line options.
+```sh
+r-grumps -h
+```
+
+* **Produce a clustered heatmap of input dataset.** Produces publication quality clustered heatmap of the supplied dataset and outputs the clustering results in the following 3 files: a colored dendrogram of the clustering results as a .png, a csv file (genomeID and clusterID as columns), and a .nwk file contaning a newick tree of the dendrogram used to create the clustered heatmap.
+```sh
+r-grumps -m heatmap -f [filepath_to_dataset]
+```
+
+* **Produce dendrogram of clustering results.** Performs clustering without creating a clustered heatmap. Outputs the clustering results in the following 3 files: a colored dendrogram of the clustering results as a .png, a csv file (genomeID and clusterID as columns), and a .nwk file contaning a newick tree of the dendrogram used to create the clustered heatmap.
+```sh
+r-grumps -m dendrogram -f [filepath_to_dataset] 
+```
+* **Create clusters at a different cutoff.** `r-grumps` by default uses the max height of the dendrogram multiplied by 1.25E-02 to cut the clustered dendrogram and produce clusters (for E. coli, this height roughly corresponds to subgroups at the phylogroup/phylotype level). The value supplied to `-c`/`--cutoff` will be what the max height of the clustered dendrogram will be multiplied to obtain clusters (i.e. `-c 1` would cut the tree at the root creating a single cluster)
+```sh
+r-grumps -m heatmap -c 1.25E-01 -f [filepath_to_dataset]
+```
+
+* **Create clusters at a set cutoff.** `r-grumps` by default uses the max height of the dendrogram multiplied by 1.25E-02 to produce clusters (for E. coli, this height roughly corresponds to subgroups at the phylogroup/phylotype level). The value supplied to `-c`/`--cutoff` will be what the height of the clustered dendrogram will be cut to obtain clusters. Note: this height is dataset dependent and should not be applied in a "one size fits all" fashion.
+```sh
+r-grumps -m general -f [filepath_to_dataset]
+```
 ## Example 
 In the data folder of this repository is a Mash distance matrix containing 776 ***Staphylococcus epidermidis*** genomes which will be used in the following example **GRUMPS** analysis. 
 
