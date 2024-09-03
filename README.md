@@ -159,52 +159,52 @@ The following section provides a set of minimal command line commands to use **G
 
 * **Produce help page.** Quickly check the software usage and available command line options.
 ```sh
-$ grumps -h
+grumps -h
 ```
 
 * **Produce summary of input dataset.** Quickly obtain multiple statistical summaries as well as a histogram for the input dataset
 ```sh
-$ grumps -m summary [filepath_to_dataset]
+grumps -m summary [filepath_to_dataset]
 ```
 
 * **Clean input dataset using 'regular' cleaning mode.** Clean the input dataset using K-means clustering. 
 ```sh
-$ grumps -m regular [filepath_to_dataset] 
+grumps -m regular [filepath_to_dataset] 
 ```
 
 * **Clean input dataset using 'strict' cleaning mode.** Clean the input dataset using K-means clustering followed by a three-sigma rule based cleaning step using the means of each genome.
 ```sh
-$ grumps -m strict [filepath_to_dataset]
+grumps -m strict [filepath_to_dataset]
 ```
 
 * **Clean input dataset using 'clique' cleaning mode.** Clean the input dataset with a graph-based clustering approach. Useful for dividing datasets containing multiple species into a collection of uncleaned species level datasets.
 ```sh
-$ grumps -m clique [filepath_to_dataset]
+grumps -m clique [filepath_to_dataset]
 ```
 
 * **Clean input dataset using 'sigma' cleaning mode.** Clean the input dataset using a three-sigma rule based cleaning step applied to the extreme left and right tails of value distribution for each genome. Note: this step is automatically performed in 'regular' and 'strict' cleaning modes if `-s no` not specified.
 ```sh
-$ grumps -m sigma [filepath_to_dataset]
+grumps -m sigma [filepath_to_dataset]
 ```
 
 * **Clean input dataset using 'target' cleaning mode.** Clean the input dataset using a set of target genomes. Any genome that has a value greater than the cutoff (default 0.05) to any of the provided target genomes are removed.
 ```sh
-$ grumps -m target -t [filepath_to_file_with_target_ids] [filepath_to_dataset]
+grumps -m target -t [filepath_to_file_with_target_ids] [filepath_to_dataset]
 ```
 
 * **Clean input dataset using 'remover' cleaning mode.** Remove a set of genomes from the input dataset by ID. 
 ```sh
-$ grumps -m remover -r [filepath_to_file_with_ids_to_remove] [filepath_to_dataset]
+grumps -m remover -r [filepath_to_file_with_ids_to_remove] [filepath_to_dataset]
 ```
 
 ## Helper Script
 `distmat_converter` reads a regularly delimited file and returns a .csv distance matrix result. By default, the output of `mash dist` can be used by `distmat_converter` to obtain a Mash distance matrix for **GRUMPS**
 ```sh
-$ distmat_converter [filepath_to_mash_output.tab]
+distmat_converter [filepath_to_mash_output.tab]
 ```
 If an ANI delimited file is input, please specify how `distmat_converter` should handle the ANI values with the options `-c yes` or `-i yes`. Note: `-c` or `-i` are conflicting options with `-c` having a higher priority. `-c yes` converts the ANI values to Mash values via (100-ANI)/1. `-i yes` simply inverts ANI values via 100-ANI. 
 ```sh
-$ distmat_converter -c yes [filepath_to_fastANI_output.tab]
+distmat_converter -c yes [filepath_to_fastANI_output.tab]
 ```
 
 ## Example 
@@ -212,7 +212,7 @@ In the data folder of this repository is a Mash distance matrix containing 776 *
 
 ### Step 1: Run GRUMPS in 'summary' mode to obtain an overview of the dataset
 ```sh
-$ grumps -m summary ./data/Staphylococcus_epidermidis.tab_distmat.csv
+grumps -m summary ./data/Staphylococcus_epidermidis.tab_distmat.csv
 ```
 
 In addition to a set of three files summarizing the distribution of values for each genome, the overall dataset, and the means of the dataset, a histogram of all the values in the dataset is also produced by this mode. 
