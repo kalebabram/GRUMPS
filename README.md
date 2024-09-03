@@ -207,16 +207,6 @@ grumps -m target -t [filepath_to_file_with_target_ids] [filepath_to_dataset]
 ```sh
 grumps -m remover -r [filepath_to_file_with_ids_to_remove] [filepath_to_dataset]
 ```
-
-## Helper Script
-`distmat_converter` reads a regularly delimited file and returns a .csv distance matrix result. By default, the output of `mash dist` can be used by `distmat_converter` to obtain a Mash distance matrix for `grumps`
-```sh
-distmat_converter [filepath_to_mash_output.tab]
-```
-If an ANI delimited file is input, please specify how `distmat_converter` should handle the ANI values with the options `-c yes` or `-i yes`. Note: `-c` or `-i` are conflicting options with `-c` having a higher priority. `-c yes` converts the ANI values to Mash values via (100-ANI)/1. `-i yes` simply inverts ANI values via 100-ANI. 
-```sh
-distmat_converter -c yes [filepath_to_fastANI_output.tab]
-```
 ### `r-grumps`
 The following section provides an overview of the command line component of `r-grumps`. Please use the help page, `r-grumps -h`, to see all command line options and what modes these options can be used with. 
 
@@ -245,6 +235,16 @@ r-grumps -m heatmap -c 1.25E-01 -f [filepath_to_dataset]
 ```sh
 r-grumps -m general -f [filepath_to_dataset]
 ```
+## Helper Script
+`distmat_converter` reads a regularly delimited file and returns a .csv distance matrix result. By default, the output of `mash dist` can be used by `distmat_converter` to obtain a Mash distance matrix for `grumps`
+```sh
+distmat_converter [filepath_to_mash_output.tab]
+```
+If an ANI delimited file is input, please specify how `distmat_converter` should handle the ANI values with the options `-c yes` or `-i yes`. Note: `-c` or `-i` are conflicting options with `-c` having a higher priority. `-c yes` converts the ANI values to Mash values via (100-ANI)/1. `-i yes` simply inverts ANI values via 100-ANI. 
+```sh
+distmat_converter -c yes [filepath_to_fastANI_output.tab]
+```
+
 ## Example 
 In the data folder of this repository is a Mash distance matrix containing 776 ***Staphylococcus epidermidis*** genomes which will be used in the following example `grumps` analysis. 
 
