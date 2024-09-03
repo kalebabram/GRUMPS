@@ -11,5 +11,4 @@ export DISABLE_AUTOBREW=1
 R -e 'devtools::install_github("kalebabram/r_grumps")' 
 mkdir -p ${PREFIX}/bin
 wget https://raw.githubusercontent.com/kalebabram/r_grumps/main/cligrumps.R -O ${PREFIX}/bin/r-grumps
-#wget https://raw.githubusercontent.com/kalebabram/r_grumps/main/rgrumps -O ${PREFIX}/bin/r-grumps
 chmod +x ${PREFIX}/bin/r-grumps
