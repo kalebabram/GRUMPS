@@ -75,7 +75,8 @@ grumps
 ├── .api
 │   └── .pipeLine()
 ├── .core
-│   └── .grumpsObj()
+│   ├── .grumpsObj()
+│   └── .distmatConverter()
 └── .modes
     ├── .regularMode()
     ├── .removerMode()
