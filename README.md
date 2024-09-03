@@ -83,17 +83,22 @@ In order to get the CLI entrypoint for the R package, simply download the Rscrip
 
 While **GRUMPS** has many components, the following overview summarizes functions which users are intended to interact with:
 
-`grumps`
-  * `api`
-    * `pipeLine` - a function which runs the entire **GRUMPS** pipeline with the specified parameters (same defaults as CLI version are used)   
-  * `modes`
-    * `regularMode` - a function which executes the 'regular' or 'strict' cleaning modes of **GRUMPS** based on specified parameters
-    * `removerMode` - a function which executes the 'remover' cleaning mode of **GRUMPS** based on specified parameters
-    * `targetMode` - a function which executes the 'target' cleaning mode of **GRUMPS** based on specified parameters
-    * `smallMode` - a function which executes the 'small' cleaning mode of **GRUMPS** based on specified parameters
-    * `sigmaMode` - a function which executes the 'sigma' cleaning mode of **GRUMPS** based on specified parameters
-    * `summaryMode` - a function which executes the 'summary' cleaning mode of **GRUMPS** 
-    * `cliqueMode` - a function which executes the 'remover' cleaning mode of **GRUMPS** based on specified parameters
+```sh
+grumps
+├── .api
+│   └── .pipeLine()
+├── .core
+│   └── .grumpsObj()
+└── .modes
+    ├── .regularMode()
+    ├── .removerMode()
+    ├── .targetMode()
+    ├── .smallMode()
+    ├── .sigmaMode()
+    ├── .summaryMode()
+    └── .cliqueMode()
+```
+Note: `import grumps.api as grumps` will automatically load all the above functions which can be accessed via `grumps.<function_name>` (i.e. `grumps.grumpsObj()`)
 
 The intended use of the python **GRUMPS** library is as follows:
 ```py
@@ -117,6 +122,8 @@ data = grumps.regularMode(data)
 
 ### R
 **GRUMPS** also has an R library available. 
+
+An example RScript is given below:
 ```R
 library(rgrumps)
 # change filepath to path of the distance matrix
