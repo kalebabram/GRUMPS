@@ -39,7 +39,6 @@ classifiers = [
 ]
 keywords = [
     "genome",
-    "assembly",
     "clustering",
     "population structure",
     "ANI",
@@ -57,45 +56,22 @@ Readme = "https://github.com/kalebabram/grumps/blob/master/README.md"
 grumps = "grumps.core.cli2:cli"
 distmat_converter = "grumps.core.distmat_converter:main"
 
-
-
-# pyproject.toml documentation:
-# https://peps.python.org/pep-0621/
-# https://hatch.pypa.io/latest/config/metadata/
-# https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html
-# https://python-poetry.org/docs/pyproject/
-
-
 [tool.hatch.version]
 path = "src/grumps/__about__.py"
 
-#[tool.hatch.build.targets.sdist]
-#include = [
-#    "src"
-#]
+[tool.hatch.build.targets.sdist]
+include = [
+    "src"
+]
 
-#[tool.hatch.build.targets.wheel]
-#packages = [
-#    "src"
-#]
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src"
+]
 
-# # include other files
-# [tool.hatch.build.force-include]
-# "LICENSE" = "grumps/LICENSE"
-# "README.md" = "grumps/README.md"
-# "CHANGELOG.md" = "grumps/CHANGELOG.md"
+# include other files
+[tool.hatch.build.force-include]
+"LICENSE" = "grumps/LICENSE"
+"README.md" = "grumps/README.md"
+"CHANGELOG.md" = "grumps/CHANGELOG.md"
 
-#[tool.isort]
-#profile = "black"
-#conda_env = "environment.yml"
-#overwrite_in_place = true
-
-#[tool.flakeheaven]
-#max_line_length = 88
-#show_source = true
-
-#[tool.flakeheaven.plugins]
-#flake8-bugbear = ["+*"]
-#pycodestyle = ["+*", "-E501", "-W503"]
-#pyflakes = ["+*"]
-#pylint = ["+*"]
