@@ -1,8 +1,8 @@
 {% set name = "grumps" %}
-{% set version = "0.9.9.9" %}
+{% set version = "1.0.0" %}
 
 package:
-  name: {{ name|lower }}
+  name: "py-grumps"
   version: {{ version }}
 
 source:
@@ -12,9 +12,7 @@ source:
 
 build:
   number: 0
-  rpaths:
-    - lib/R/lib/
-    - lib/
+  script: "{{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv "
 
 package:
   name: {{ name|lower }}
@@ -23,13 +21,8 @@ package:
 requirements:
   build:
     - python >=3.7
-    - wget
     - hatchling
     - pip
-    - r-essentials 
-    - r-devtools
-    - r-ape
-    - r-optparse 
   run:
     - python 
     - scikit-learn
@@ -38,16 +31,16 @@ requirements:
     - pandas 
     - numpy 
     - networkx 
-    - r-essentials 
-    - r-ape
-    - r-optparse
+
 test:
   imports:
     - grumps
   commands:
+    - pip check
     - grumps --help
     - distmat_converter --help
-    - r-grumps -h 
+  requires:
+    - pip
 
 about:
   summary: Genomic distance based Rapid Uncovering of Microbial Population Structures
