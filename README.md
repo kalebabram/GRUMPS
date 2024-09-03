@@ -22,7 +22,7 @@ The best installation method for `grumps` is conda within a new environment.
 ```sh
 conda env create -n grumps_env kabram::grumps
 ```
-Note: using [mamba](https://mamba.readthedocs.io/en/latest/) as a replacement for conda can spead up the environment creation process.
+**Note:** using [mamba](https://mamba.readthedocs.io/en/latest/) as a replacement for conda can spead up the environment creation process.
 
 #### Installing into existing environment
 ```sh
@@ -43,13 +43,13 @@ conda install kabram::r-grumps
 ```sh
 pip install grumps
 ```
-Note: the pip version does not have the R dependecies needed for `r-grumps`. 
+**Note:** the pip version does not have the R dependecies needed for `r-grumps`. 
 
 #### r-devtools
 ```sh
 R -e 'devtools::install_github("kalebabram/r_grumps")'
 ```
-Note: R library `devtools` is required: `install.packages('devtools')` or `conda install r-devtools` for this approach. To get the CLI entrypoint, download `cligrumps.R` from the repository. You can rename the Rscript to `r-grumps`, relocate it to a directory in your $PATH, and make it executable for equivalent behavior to the conda install of `r-grumps`. 
+**Note:** R library `devtools` is required: `install.packages('devtools')` or `conda install r-devtools` for this approach. To get the CLI entrypoint, download `cligrumps.R` from the repository. You can rename the Rscript to `r-grumps`, relocate it to a directory in your $PATH, and make it executable for equivalent behavior to the conda install of `r-grumps`. 
 
 #### Source
 All neccessary files needed to build the python package of `grumps` are found in `src/grumps` within this repository.
@@ -99,7 +99,7 @@ grumps
     ├── .summaryMode()
     └── .cliqueMode()
 ```
-Note: `import grumps.api as grumps` will automatically load all the above functions which can be accessed via `grumps.<function_name>` (i.e. `grumps.grumpsObj()`)
+**Note:** `import grumps.api as grumps` will automatically load all the above functions which can be accessed via `grumps.<function_name>` (i.e. `grumps.grumpsObj()`)
 
 The intended use of the python `grumps` library is as follows:
 ```py
@@ -193,7 +193,7 @@ grumps -m strict [filepath_to_dataset]
 grumps -m clique [filepath_to_dataset]
 ```
 
-* **Clean input dataset using `sigma` cleaning mode.** Clean the input dataset using a three-sigma rule based cleaning step applied to the extreme left and right tails of value distribution for each genome. Note: this step is automatically performed in `regular` and `strict` cleaning modes if `-s no` not specified.
+* **Clean input dataset using `sigma` cleaning mode.** Clean the input dataset using a three-sigma rule based cleaning step applied to the extreme left and right tails of value distribution for each genome. **Note:** this step is automatically performed in `regular` and `strict` cleaning modes if `-s no` not specified.
 ```sh
 grumps -m sigma [filepath_to_dataset]
 ```
@@ -210,7 +210,7 @@ grumps -m remover -r [filepath_to_file_with_ids_to_remove] [filepath_to_dataset]
 ### `r-grumps`
 The following section provides an overview of the command line component of `r-grumps`. Please use the help page, `r-grumps -h`, to see all command line options and what modes these options can be used with. 
 
-Note: all modes print the height used to cut the clustered dendrogram and produce clusters (this information is also found in the filenames output by `r-grumps`). 
+**Note:** all modes print the height used to cut the clustered dendrogram and produce clusters (this information is also found in the filenames output by `r-grumps`). 
 
 * **Produce help page.** Quickly check the software usage and available command line options.
 ```sh
@@ -240,7 +240,7 @@ r-grumps -m general -f [filepath_to_dataset]
 ```sh
 distmat_converter [filepath_to_mash_output.tab]
 ```
-If an ANI delimited file is input, please specify how `distmat_converter` should handle the ANI values with the options `-c yes` or `-i yes`. Note: `-c` or `-i` are conflicting options with `-c` having a higher priority. `-c yes` converts the ANI values to Mash values via (100-ANI)/1. `-i yes` simply inverts ANI values via 100-ANI. 
+If an ANI delimited file is input, please specify how `distmat_converter` should handle the ANI values with the options `-c yes` or `-i yes`. **Note:** `-c` or `-i` are conflicting options with `-c` having a higher priority. `-c yes` converts the ANI values to Mash values via (100-ANI)/1. `-i yes` simply inverts ANI values via 100-ANI. 
 ```sh
 distmat_converter -c yes [filepath_to_fastANI_output.tab]
 ```
@@ -277,7 +277,7 @@ In addition to a set of three files summarizing the distribution of values for e
 ![histogram_clean](https://github.com/kalebabram/GRUMPS/blob/main/data/Staphylococcus_epidermidis.tab_distmat_cleaned_regular_sigma_0.05_ward_distmat_summary_histogram.png)
 Viewing the histogram for the cleaned dataset, we can see that there are no more comparisons above the species boundary of 0.05 as well as a similar topology to the histogram produced in **Step 1**.
 
-Now that we have our final cleaned dataset and the summary statistics, we can use the Rscript `r_grumps` to produce the final heatmap for publication.
+Now that we have our final cleaned dataset and the summary statistics, we can use the Rscript `r-grumps` to produce the final heatmap for publication.
 
 ### Step 4: Run `r-grumps` to obtain the final clustered heatmap and grouping information
 ```sh
