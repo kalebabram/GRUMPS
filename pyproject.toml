@@ -24,7 +24,7 @@ dependencies = [
 ]
 
 dynamic = ["version"]
-readme = {file = "README.md"}
+readme = "README.md"
 license = {file = "LICENSE"}
 classifiers = [
     "Development Status :: 4 - Beta",
