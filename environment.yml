@@ -1,6 +1,7 @@
 name: grumps
 channels:
   - conda-forge
+  - kabram
 
 dependencies:
   - python
@@ -14,3 +15,5 @@ dependencies:
   - r-devtools
   - r-optparse
   - r-sparcl
+  - py-grumps
+  - r-grumps
