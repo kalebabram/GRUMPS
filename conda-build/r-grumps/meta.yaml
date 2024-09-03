@@ -1,0 +1,36 @@
+{% set name = "r-grumps" %}
+{% set version = "1.0.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+build:
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - wget
+    - r-essentials 
+    - r-devtools
+    - r-ape
+    - r-optparse 
+  run:
+    - r-essentials 
+    - r-ape
+    - r-optparse
+test:
+  commands:
+    - r-grumps -h 
+
+about:
+  summary: Genomic distance based Rapid Uncovering of Microbial Population Structures
+  license: Apache-2.0
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - kalebabram
