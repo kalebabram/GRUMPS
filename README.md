@@ -1,21 +1,21 @@
 # GRUMPS
 ***G***enomic distance based ***R***apid ***U***ncovering of ***M***icrobial ***P***opulation ***S***tructures.
 
-**GRUMPS** is designed to assist and speed up the construction of species level population structures using Mash distances as an input. ANI values can be used as well if the ANI values are converted to a decimal difference value {i.e. (100 - ANIvalue) /100}. Additional helper scripts are provided if you do not have a correctly formatted distance matrix to input.
+`grumps` is designed to assist and speed up the construction of species level population structures using Mash distances as an input. ANI values can be used as well if the ANI values are converted to a decimal difference value {i.e. (100 - ANIvalue) /100}. Additional helper scripts are provided if you do not have a correctly formatted distance matrix to input.
 
-**GRUMPS** reads a normalized distance matrix and returns a filtered result. It can be run in 'summary', 'regular', 'strict', 'sigma', 'target',
-'clique', and 'small' modes. 
+`grumps` reads a normalized distance matrix containing NxN pairwise genome comparisons and returns a filtered result. 
+
+It can be run in `summary`, `regular`, `strict`, `sigma`, `target`,
+`clique`, and `small` modes. 
 
 For more information about these modes please see the white paper:
 https://doi.org/10.1101/2022.12.19.521123
 
-
-
 ## Installation
 
-**GRUMPS** is installable from conda, pip or from source. 
+`grumps` is installable from conda, pip or from source. 
 
-The best installation option for **GRUMPS** is conda within a new environment. 
+The best installation option for `grumps` is conda within a new environment. 
 
 ### Installing from conda
 #### Creating a new environment
@@ -28,7 +28,7 @@ Note: using [mamba](https://mamba.readthedocs.io/en/latest/) as a replacement fo
 ```sh
 conda install kabram::grumps
 ```
-**GRUMPS** has two components in the conda package: `py-grumps` and `r-grumps`. Each component is a conda package which contains all necessary dependencies for that component. 
+`grumps` has two components in the conda package: `py-grumps` and `r-grumps`. Each component is a conda package which contains all necessary dependencies for that component. 
 
 To install the python component:
 ```sh
@@ -52,14 +52,14 @@ R -e 'devtools::install_github("kalebabram/r_grumps")'
 Note: R library "devtools" is required: `install.packages('devtools')` or `conda install r-devtools` for this approach. To get the CLI entrypoint, download `cligrumps.R` from the repository. You can rename the Rscript to `r-grumps`, relocate it to a directory in your $PATH, and make it executable for equivalent behavior to the conda install of `r-grumps`. 
 
 #### Source
-All neccessary files needed to build the python package of **GRUMPS** are found in `src/grumps` within this repository.
+All neccessary files needed to build the python package of `grumps` are found in `src/grumps` within this repository.
 
-All neccessary files needed to build the R package of **GRUMPS** are found in the r_grumps repository: https://github.com/kalebabram/r_grumps.git
+All neccessary files needed to build the R package of `grumps` are found in the `r-grumps` repository: https://github.com/kalebabram/r-grumps.git
 
 In order to get the CLI entrypoint for the R package, simply download the Rscript `cligrumps.R` to your computer. You can rename the Rscript to `r-grumps`, relocate it to a directory in your $PATH, and make it executable for equivalent behavior to the conda install of `r-grumps`. 
 
 ## Dependencies
-**GRUMPS** utilizes the following python libraries:
+`grumps` utilizes the following python libraries:
 * python 
 * pandas
 * networkx
@@ -77,18 +77,19 @@ In order to get the CLI entrypoint for the R package, simply download the Rscrip
 * stats
 * utils
 
-## **GRUMPS** library support
+## `grumps` library support
 ### python
-**GRUMPS** also is available as a python library to allow easy integration into existing python based workflows.
+`grumps` also is available as a python library to allow easy integration into existing python based workflows.
 
-While **GRUMPS** has many components, the following overview summarizes functions which users are intended to interact with:
+While `grumps` has many components, the following overview summarizes functions which users are intended to interact with:
 
 ```sh
 grumps
 ├── .api
 │   └── .pipeLine()
 ├── .core
-│   └── .grumpsObj()
+│   ├── .grumpsObj()
+│   └── .distmat_converter()
 └── .modes
     ├── .regularMode()
     ├── .removerMode()
@@ -100,7 +101,7 @@ grumps
 ```
 Note: `import grumps.api as grumps` will automatically load all the above functions which can be accessed via `grumps.<function_name>` (i.e. `grumps.grumpsObj()`)
 
-The intended use of the python **GRUMPS** library is as follows:
+The intended use of the python `grumps` library is as follows:
 ```py
 import grumps.api as grumps
 data = grumps.grumpsObj('/path/to/distmat/file.csv')
@@ -121,9 +122,9 @@ data = grumps.regularMode(data)
 ```
 
 ### R
-**GRUMPS** also has an R library available. 
+`r-grumps` also has an R library available. 
 
-An example RScript is given below:
+An example RScript using `r-grumps` is given below:
 ```R
 library(rgrumps)
 # change filepath to path of the distance matrix
@@ -161,8 +162,8 @@ if (grumps$mode == 'general'){
 ```
 
 ## Usage Summary
-### **GRUMPS**
-The following section provides a set of minimal command line commands to use **GRUMPS**. Please use the help page, `grumps -h`, to see all command line options and what modes these options can be used with.  
+### `grumps`
+The following section provides a set of minimal command line commands to use `grumps`. Please use the help page, `grumps -h`, to see all command line options and what modes these options can be used with.  
 
 * **Produce help page.** Quickly check the software usage and available command line options.
 ```sh
@@ -174,38 +175,38 @@ grumps -h
 grumps -m summary [filepath_to_dataset]
 ```
 
-* **Clean input dataset using 'regular' cleaning mode.** Clean the input dataset using K-means clustering. 
+* **Clean input dataset using `regular` cleaning mode.** Clean the input dataset using K-means clustering. 
 ```sh
 grumps -m regular [filepath_to_dataset] 
 ```
 
-* **Clean input dataset using 'strict' cleaning mode.** Clean the input dataset using K-means clustering followed by a three-sigma rule based cleaning step using the means of each genome.
+* **Clean input dataset using `strict` cleaning mode.** Clean the input dataset using K-means clustering followed by a three-sigma rule based cleaning step using the means of each genome.
 ```sh
 grumps -m strict [filepath_to_dataset]
 ```
 
-* **Clean input dataset using 'clique' cleaning mode.** Clean the input dataset with a graph-based clustering approach. Useful for dividing datasets containing multiple species into a collection of uncleaned species level datasets.
+* **Clean input dataset using `clique` cleaning mode.** Clean the input dataset with a graph-based clustering approach. Useful for dividing datasets containing multiple species into a collection of uncleaned species level datasets.
 ```sh
 grumps -m clique [filepath_to_dataset]
 ```
 
-* **Clean input dataset using 'sigma' cleaning mode.** Clean the input dataset using a three-sigma rule based cleaning step applied to the extreme left and right tails of value distribution for each genome. Note: this step is automatically performed in 'regular' and 'strict' cleaning modes if `-s no` not specified.
+* **Clean input dataset using `sigma` cleaning mode.** Clean the input dataset using a three-sigma rule based cleaning step applied to the extreme left and right tails of value distribution for each genome. Note: this step is automatically performed in `regular` and `strict` cleaning modes if `-s no` not specified.
 ```sh
 grumps -m sigma [filepath_to_dataset]
 ```
 
-* **Clean input dataset using 'target' cleaning mode.** Clean the input dataset using a set of target genomes. Any genome that has a value greater than the cutoff (default 0.05) to any of the provided target genomes are removed.
+* **Clean input dataset using `target` cleaning mode.** Clean the input dataset using a set of target genomes. Any genome that has a value greater than the cutoff (default 0.05) to any of the provided target genomes are removed.
 ```sh
 grumps -m target -t [filepath_to_file_with_target_ids] [filepath_to_dataset]
 ```
 
-* **Clean input dataset using 'remover' cleaning mode.** Remove a set of genomes from the input dataset by ID. 
+* **Clean input dataset using `remover` cleaning mode.** Remove a set of genomes from the input dataset by ID. 
 ```sh
 grumps -m remover -r [filepath_to_file_with_ids_to_remove] [filepath_to_dataset]
 ```
 
 ## Helper Script
-`distmat_converter` reads a regularly delimited file and returns a .csv distance matrix result. By default, the output of `mash dist` can be used by `distmat_converter` to obtain a Mash distance matrix for **GRUMPS**
+`distmat_converter` reads a regularly delimited file and returns a .csv distance matrix result. By default, the output of `mash dist` can be used by `distmat_converter` to obtain a Mash distance matrix for `grumps`
 ```sh
 distmat_converter [filepath_to_mash_output.tab]
 ```
