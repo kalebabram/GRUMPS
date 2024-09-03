@@ -85,6 +85,7 @@ grumps
     ├── .summaryMode()
     └── .cliqueMode()
 ```
+Note: importing `grumps.api as grumps` will automatically load all the above functions which can be accessed via grumps.<function_name> (i.e. `grumps.grumpsObj()`)
 
 The intended use of the python **GRUMPS** library is as follows:
 ```py
