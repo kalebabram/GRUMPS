@@ -61,7 +61,7 @@ Note: R library "devtools" is required: `install.packages('devtools')` or `conda
 #### Source
 All neccessary files needed to build the python package of **GRUMPS** are found in `src/grumps` in the `grumps` repository: https://github.com/kalebabram/grumps.git
 
-All neccessary files needed to build the R package of **GRUMPS** are found in the `r_grumps` repository: https://github.com/kalebabram/r_grumps.git
+All neccessary files needed to build the R package of **GRUMPS** are found in the `r-grumps` repository: https://github.com/kalebabram/r-grumps.git
 
 In order to get the CLI entrypoint for the R package, simply download the Rscript `cligrumps.R` to your computer. You can rename the Rscript to `r-grumps`, relocate it to a directory in your $PATH, and make it executable for equivalent behavior to the conda install of `r-grumps`. 
 
@@ -85,7 +85,7 @@ grumps
     ├── .summaryMode()
     └── .cliqueMode()
 ```
-Note: `import grumps.api as grumps` will automatically load all the above functions which can be accessed via grumps.<function_name> (i.e. `grumps.grumpsObj()`)
+Note: `import grumps.api as grumps` will automatically load all the above functions which can be accessed via `grumps.<function_name>` (i.e. `grumps.grumpsObj()`)
 
 The intended use of the python **GRUMPS** library is as follows:
 ```py
