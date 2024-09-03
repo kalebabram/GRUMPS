@@ -11,9 +11,9 @@ dependencies:
   - numpy
   - seaborn
   - scikit-learn
-  - r-essentials=3.6.0
+  - r-essentials
   - r-devtools
   - r-optparse
-  - r-sparcl
+  - r-ape
   - py-grumps
   - r-grumps
