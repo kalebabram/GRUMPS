@@ -3,7 +3,7 @@ from grumps.__about__ import __author__
 from grumps.__about__ import __date__
 class outputConverter(object):
 	"""
-	This script is designed to assist and speed up the construction of 
+	This object is designed to assist and speed up the construction of 
 	symetrical distance matrices from the output of Mash or FastANI.
 	"""
 
@@ -165,10 +165,27 @@ Please double check the filepath or file name.") from e
 				fileLines = ','.join(loopID + loopDist)
 			outFile.write(fileLines)
 			outFile.close()
+			
+def distmatConverter(filePath, delimiter = '\t', trimOpt = 'yes', convertANI = 'no', invertANI = 'no'):
+	convertedDistmat = outputConverter(filePath)
+	convertedDistmat.delimiter = delimiter
+	convertedDistmat.trimOpt = trimOpt
+	convertedDistmat.convertANI = convertANI
+	convertedDistmat.invertANI = invertANI
+	if convertANI == 'yes':
+		invertANI == 'no'
+	# run refFinder to find reference position
+	convertedDistmat.refFinder()
+	# run headerBuilder to build header
+	convertedDistmat.headerBuilder()
+	# write the output
+	convertedDistmat.outputMaker()
+	try:
+		outFP = convertedDistmat.inFile.rsplit('.',1)[0] + '_distmat.csv'
+	except:
+		outFP = convertedDistmat.inFile+ '_distmat.csv'
+	print('Converted distance matrix located at: ' + outFP)
 
-
-###########
-# Module test
 def main():
 	import argparse
 	usage = """%(prog)s reads a regularly delimited file and returns a .csv \
@@ -220,25 +237,27 @@ def main():
 	if convertANI == 'yes':
 		invertANI == 'no'
 
-	distmatConverter = outputConverter(filepath)
+	convertedDistmat = outputConverter(filepath)
 
 	if args.delimiter:
-		distmatConverter.delimiter = delimiter
+		convertedDistmat.delimiter = delimiter
 	if args.trimOpt:
-		distmatConverter.trimOpt = trimOpt
+		convertedDistmat.trimOpt = trimOpt
 	if args.convertANI:
-		distmatConverter.convertANI = convertANI
+		convertedDistmat.convertANI = convertANI
 	if args.invertANI:
-		distmatConverter.invertANI = invertANI
+		convertedDistmat.invertANI = invertANI
 
 	# run refFinder to find reference position
-	distmatConverter.refFinder()
+	convertedDistmat.refFinder()
 
 	# run headerBuilder to build header
-	distmatConverter.headerBuilder()
+	convertedDistmat.headerBuilder()
 
 	# write the output
-	distmatConverter.outputMaker()
+	convertedDistmat.outputMaker()
 
+###########
+# Module test
 if __name__ == "__main__":
 	main()
