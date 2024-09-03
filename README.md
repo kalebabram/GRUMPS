@@ -15,7 +15,7 @@ https://doi.org/10.1101/2022.12.19.521123
 
 `grumps` is installable from conda, pip or from source. 
 
-The best installation option for `grumps` is conda within a new environment. 
+The best installation method for `grumps` is conda within a new environment. 
 
 ### Installing from conda
 #### Creating a new environment
@@ -43,20 +43,20 @@ conda install kabram::r-grumps
 ```sh
 pip install grumps
 ```
-Note: the pip version does not have the R dependecies needed for **r-grumps**. 
+Note: the pip version does not have the R dependecies needed for `r-grumps`. 
 
 #### r-devtools
 ```sh
 R -e 'devtools::install_github("kalebabram/r_grumps")'
 ```
-Note: R library "devtools" is required: `install.packages('devtools')` or `conda install r-devtools` for this approach. To get the CLI entrypoint, download `cligrumps.R` from the repository. You can rename the Rscript to `r-grumps`, relocate it to a directory in your $PATH, and make it executable for equivalent behavior to the conda install of `r-grumps`. 
+Note: R library `devtools` is required: `install.packages('devtools')` or `conda install r-devtools` for this approach. To get the CLI entrypoint, download `cligrumps.R` from the repository. You can rename the Rscript to `r-grumps`, relocate it to a directory in your $PATH, and make it executable for equivalent behavior to the conda install of `r-grumps`. 
 
 #### Source
 All neccessary files needed to build the python package of `grumps` are found in `src/grumps` within this repository.
 
 All neccessary files needed to build the R package of `grumps` are found in the `r-grumps` repository: https://github.com/kalebabram/r-grumps.git
 
-In order to get the CLI entrypoint for the R package, simply download the Rscript `cligrumps.R` to your computer. You can rename the Rscript to `r-grumps`, relocate it to a directory in your $PATH, and make it executable for equivalent behavior to the conda install of `r-grumps`. 
+In order to get the CLI entrypoint for the R package, simply download the Rscript `cligrumps.R` to your computer. You can rename the Rscript to `r-grumps`, relocate it to a directory in your `$PATH`, and make it executable for equivalent behavior to the conda install of `r-grumps`. 
 
 ## Dependencies
 `grumps` utilizes the following python libraries:
@@ -89,7 +89,7 @@ grumps
 │   └── .pipeLine()
 ├── .core
 │   ├── .grumpsObj()
-│   └── .distmat_converter()
+│   └── .distmatConverter()
 └── .modes
     ├── .regularMode()
     ├── .removerMode()
@@ -104,6 +104,9 @@ Note: `import grumps.api as grumps` will automatically load all the above functi
 The intended use of the python `grumps` library is as follows:
 ```py
 import grumps.api as grumps
+# if you need to convert your input file to NxN distance matrix. The location of the converted file is printed.
+grumps.distmatConverter('/path/to/input/file.tab')
+# load in the NxN distance matrix
 data = grumps.grumpsObj('/path/to/distmat/file.csv')
 # change these grumpsObj defaults or the cleaning modes/pipeline will run with defaults
 data.mode = 'regular'
@@ -243,9 +246,9 @@ r-grumps -m heatmap -c 1.25E-01 -f [filepath_to_dataset]
 r-grumps -m general -f [filepath_to_dataset]
 ```
 ## Example 
-In the data folder of this repository is a Mash distance matrix containing 776 ***Staphylococcus epidermidis*** genomes which will be used in the following example **GRUMPS** analysis. 
+In the data folder of this repository is a Mash distance matrix containing 776 ***Staphylococcus epidermidis*** genomes which will be used in the following example `grumps` analysis. 
 
-### Step 1: Run GRUMPS in 'summary' mode to obtain an overview of the dataset
+### Step 1: Run `grumps` in `summary` mode to obtain an overview of the dataset
 ```sh
 grumps -m summary ./data/Staphylococcus_epidermidis.tab_distmat.csv
 ```
@@ -254,9 +257,9 @@ In addition to a set of three files summarizing the distribution of values for e
 ![histogram](https://github.com/kalebabram/GRUMPS/blob/main/data/Staphylococcus_epidermidis.tab_distmat_summary_histogram.png)
 Looking at the above histogram, there is a noticeable set of comparisons present above 0.2 (which is well above the Mash distance species boundary of 0.05) and is a clear indicator that this uncleaned dataset contains several outlier genomes. 
 
-To address this issue, we will run **GRUMPS** in 'regular' mode with a cutoff of 0.05, the optional 'sigma' filtering step applied, and we will allow **GRUMPS** to create a clustered heatmap to visualize our cleaned dataset. 
+To address this issue, we will run `grumps` in `regular` mode with a cutoff of 0.05, the optional `sigma` filtering step applied, and we will allow `grumps` to create a clustered heatmap to visualize our cleaned dataset. 
 
-### Step 2: Run GRUMPS in 'regular' mode using a cutoff of 0.05 with the optional 'sigma' filtering step and output the clustered heatmap as a png
+### Step 2: Run `grumps` in `regular` mode using a cutoff of 0.05 with the optional `sigma` filtering step and output the clustered heatmap as a .png file
 ```sh
 grumps -m regular -c 0.05 -s yes -p yes -f png -o ward ./data/Staphylococcus_epidermidis.tab_distmat.csv
 ```
@@ -266,7 +269,7 @@ The population structure of ***Staphylococcus epidermidis*** can then be observe
 ![clustered_heatmap](https://github.com/kalebabram/GRUMPS/blob/main/data/Staphylococcus_epidermidis.tab_distmat_cleaned_regular_sigma_0.05_ward_heatmap.png)
 As the maximum value contained in the clustered heatmap is below 0.05 and the population structure is clearly visible in the clustered heatmap, we can consider this dataset cleaned. We will now run **GRUMPS** in 'summary' mode again to obtain an updated summary of the now cleaned ***Staphylococcus epidermidis*** dataset. 
 
-### Step 3: Run GRUMPS in 'summary' mode to obtain an overview of the cleaned dataset
+### Step 3: Run `grumps` in `summary` mode to obtain an overview of the cleaned dataset
 ```sh
 grumps -m summary ./data/Staphylococcus_epidermidis.tab_distmat_cleaned_regular_sigma_0.05_ward_distmat.csv
 ```
@@ -276,11 +279,11 @@ Viewing the histogram for the cleaned dataset, we can see that there are no more
 
 Now that we have our final cleaned dataset and the summary statistics, we can use the Rscript `r_grumps` to produce the final heatmap for publication.
 
-### Step 4: Run r_grumps to obtain the final clustered heatmap and grouping information
+### Step 4: Run `r-grumps` to obtain the final clustered heatmap and grouping information
 ```sh
-r_grumps -f ./data/Staphylococcus_epidermidis.tab_distmat_cleaned_regular_sigma_0.05_ward_distmat.csv -m heatmap -c 0.0125 -g ward.D2 
+r-grumps -f ./data/Staphylococcus_epidermidis.tab_distmat_cleaned_regular_sigma_0.05_ward_distmat.csv -m heatmap -c 0.0125 -g ward.D2 
 ```
-**Note:** The above step is the equivalent of running `r_grumps -f ./data/Staphylococcus_epidermidis.tab_distmat_cleaned_regular_sigma_0.05_ward_distmat.csv` as the command line options used in **Step 4** are the same as the default values for these options.
+**Note:** The above step is the equivalent of running `r-grumps -f ./data/Staphylococcus_epidermidis.tab_distmat_cleaned_regular_sigma_0.05_ward_distmat.csv` as the command line options used in **Step 4** are the same as the default values for these options.
 
 ![r_clustered_heatmap](https://github.com/kalebabram/GRUMPS/blob/main/data/Staphylococcus_epidermidis.tab_distmat_cleaned_regular_sigma_0.05_ward_r_ward.D2_heatmap.png)
 We can now take the clustered heatmap from **Step 2** and **Step 4** and open them with GIMP to create the final figure.
