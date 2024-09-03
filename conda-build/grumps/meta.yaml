@@ -1,0 +1,61 @@
+{% set name = "grumps" %}
+{% set version = "1.0.0" %}
+
+package:
+  name: {{ name | lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 64a04c4a5a17a5aa162efaf2b0f6f425188aff54437025648f1cc9b9973d0fc9
+
+
+build:
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+requirements:
+  build:
+    - python >=3.7
+    - wget
+    - hatchling
+    - pip
+    - r-essentials
+    - r-devtools
+    - r-ape
+    - r-optparse
+  run:
+    - python >=3.7
+    - scikit-learn
+    - scipy
+    - seaborn 
+    - pandas 
+    - numpy 
+    - networkx 
+    - r-essentials
+    - r-devtools
+    - r-ape
+    - r-optparse
+
+test:
+  imports:
+    - grumps
+  commands:
+    - grumps --help
+    - distmat_converter --help
+    - r-grumps --help
+
+about:
+  summary: Genomic distance based Rapid Uncovering of Microbial Population Structures
+  license: Apache-2.0
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - kalebabram
