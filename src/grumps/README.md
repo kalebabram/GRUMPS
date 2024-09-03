@@ -90,6 +90,9 @@ Note: `import grumps.api as grumps` will automatically load all the above functi
 The intended use of the python **GRUMPS** library is as follows:
 ```py
 import grumps.api as grumps
+# if you need to convert your input file to NxN distance matrix. The location of the converted file is printed.
+distmatConverter('/path/to/input/file.tab')
+# load in the NxN distance matrix
 data = grumps.grumpsObj('/path/to/distmat/file.csv')
 # change these grumpsObj defaults or the cleaning modes/pipeline will run with defaults
 data.mode = 'regular'
