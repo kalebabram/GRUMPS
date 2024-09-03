@@ -243,7 +243,7 @@ grumps -m summary ./data/Staphylococcus_epidermidis.tab_distmat.csv
 ```
 
 In addition to a set of three files summarizing the distribution of values for each genome, the overall dataset, and the means of the dataset, a histogram of all the values in the dataset is also produced by this mode. 
-![histogram](data/Staphylococcus_epidermidis.tab_distmat_summary_histogram.png)
+![histogram](https://github.com/kalebabram/GRUMPS/blob/main/data/Staphylococcus_epidermidis.tab_distmat_summary_histogram.png)
 Looking at the above histogram, there is a noticeable set of comparisons present above 0.2 (which is well above the Mash distance species boundary of 0.05) and is a clear indicator that this uncleaned dataset contains several outlier genomes. 
 
 To address this issue, we will run **GRUMPS** in 'regular' mode with a cutoff of 0.05, the optional 'sigma' filtering step applied, and we will allow **GRUMPS** to create a clustered heatmap to visualize our cleaned dataset. 
@@ -255,7 +255,7 @@ grumps -m regular -c 0.05 -s yes -p yes -f png -o ward ./data/Staphylococcus_epi
 **Note:** The above step is the equivalent of running `grumps -m regular ./data/Staphylococcus_epidermidis.tab_distmat.csv` as the command line options used in **Step 2** are the same as the default values for these options. 
 
 The population structure of ***Staphylococcus epidermidis*** can then be observed in the clustered heatmap output by the command in **Step 2**.
-![clustered_heatmap](data/Staphylococcus_epidermidis.tab_distmat_cleaned_regular_sigma_0.05_ward_heatmap.png)
+![clustered_heatmap](https://github.com/kalebabram/GRUMPS/blob/main/data/Staphylococcus_epidermidis.tab_distmat_cleaned_regular_sigma_0.05_ward_heatmap.png)
 As the maximum value contained in the clustered heatmap is below 0.05 and the population structure is clearly visible in the clustered heatmap, we can consider this dataset cleaned. We will now run **GRUMPS** in 'summary' mode again to obtain an updated summary of the now cleaned ***Staphylococcus epidermidis*** dataset. 
 
 ### Step 3: Run GRUMPS in 'summary' mode to obtain an overview of the cleaned dataset
@@ -263,7 +263,7 @@ As the maximum value contained in the clustered heatmap is below 0.05 and the po
 grumps -m summary ./data/Staphylococcus_epidermidis.tab_distmat_cleaned_regular_sigma_0.05_ward_distmat.csv
 ```
 In addition to a set of three files summarizing the distribution of values for each genome, the overall dataset, and the means of the dataset, a histogram of all the values in the dataset is also produced by this mode. 
-![histogram_clean](data/Staphylococcus_epidermidis.tab_distmat_cleaned_regular_sigma_0.05_ward_distmat_summary_histogram.png)
+![histogram_clean](https://github.com/kalebabram/GRUMPS/blob/main/data/Staphylococcus_epidermidis.tab_distmat_cleaned_regular_sigma_0.05_ward_distmat_summary_histogram.png)
 Viewing the histogram for the cleaned dataset, we can see that there are no more comparisons above the species boundary of 0.05 as well as a similar topology to the histogram produced in **Step 1**.
 
 Now that we have our final cleaned dataset and the summary statistics, we can use the Rscript `r_grumps` to produce the final heatmap for publication.
@@ -274,7 +274,7 @@ r_grumps -f ./data/Staphylococcus_epidermidis.tab_distmat_cleaned_regular_sigma_
 ```
 **Note:** The above step is the equivalent of running `r_grumps -f ./data/Staphylococcus_epidermidis.tab_distmat_cleaned_regular_sigma_0.05_ward_distmat.csv` as the command line options used in **Step 4** are the same as the default values for these options.
 
-![r_clustered_heatmap](data/Staphylococcus_epidermidis.tab_distmat_cleaned_regular_sigma_0.05_ward_r_ward.D2_heatmap.png)
+![r_clustered_heatmap](https://github.com/kalebabram/GRUMPS/blob/main/data/Staphylococcus_epidermidis.tab_distmat_cleaned_regular_sigma_0.05_ward_r_ward.D2_heatmap.png)
 We can now take the clustered heatmap from **Step 2** and **Step 4** and open them with GIMP to create the final figure.
 
 ### Step 5: Post-processing using GIMP
