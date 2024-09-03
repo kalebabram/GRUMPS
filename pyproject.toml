@@ -71,9 +71,3 @@ packages = [
     "src"
 ]
 
-# include other files
-[tool.hatch.build.force-include]
-"LICENSE" = "grumps/LICENSE"
-"README.md" = "grumps/README.md"
-"CHANGELOG.md" = "grumps/CHANGELOG.md"
-
