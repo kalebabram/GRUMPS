@@ -50,7 +50,7 @@ conda install kabram::r-grumps
 ```sh
 pip install grumps
 ```
-Note: the pip version does not have the R dependecies needed for **r-grumps**. 
+Note: the pip version does not have the R dependecies needed for `r-grumps`. 
 
 #### r-devtools
 ```sh
