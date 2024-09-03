@@ -11,7 +11,7 @@ https://doi.org/10.1101/2022.12.19.521123
 
 ## Dependencies
 **GRUMPS** utilizes the following python libraries:
-* python 
+* python >=3.7
 * pandas
 * networkx
 * seaborn
