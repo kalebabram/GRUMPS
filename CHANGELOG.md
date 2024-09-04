@@ -8,7 +8,7 @@ Full integration of GitHub with PyPI and conda
  - neccessary files/configs to cause new releases of `grumps` to automatically
    build and upload to pip and conda
 
-## [1.0.0] - 2024-09-03
+## [1.0.1] - 2024-09-03
 #### `grumps`
 To update `grumps` via conda: `conda update kabram::grumps`
 
