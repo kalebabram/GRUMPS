@@ -14,6 +14,10 @@ build:
 source:
   url: https://raw.githubusercontent.com/kalebabram/r-grumps/main/LICENSE
   fn: LICENSE
+  url: https://github.com/kalebabram/r-grumps/raw/main/rgrumps_{{ version }}.tar.gz
+  sha256: ac8e155d63361d61bd9a25d3a43376c45b7f4afb
+  url: https://raw.githubusercontent.com/kalebabram/r-grumps/main/cligrumps.R
+  fn: cligrumps.R
 
 requirements:
   build:
