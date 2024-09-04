@@ -43,7 +43,9 @@ about:
   summary: Genomic distance based Rapid Uncovering of Microbial Population Structures
   license: Apache-2.0
   license_file: LICENSE
-
+  license_family: APACHE
+  license_url: https://github.com/kalebabram/grumps/blob/main/LICENSE
+  
 extra:
   recipe-maintainers:
     - kalebabram
