@@ -11,6 +11,10 @@ build:
     - lib/R/lib/
     - lib/
 
+source:
+  url: https://raw.githubusercontent.com/kalebabram/r-grumps/main/LICENSE
+  fn: LICENSE
+
 requirements:
   build:
     - wget
@@ -30,6 +34,8 @@ about:
   summary: Genomic distance based Rapid Uncovering of Microbial Population Structures
   license: Apache-2.0
   license_file: LICENSE
+  license_family: APACHE
+  license_url: https://github.com/kalebabram/r-grumps/blob/main/LICENSE
 
 extra:
   recipe-maintainers:
