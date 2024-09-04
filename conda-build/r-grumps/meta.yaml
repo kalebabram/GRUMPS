@@ -1,9 +1,9 @@
-{% set name = "r-grumps" %}
 {% set version = "1.0.1" %}
+{% set posix = 'm2-' if win else '' %}
 
 package:
-  name: {{ name|lower }}
-  version: {{ version }}
+  name: rgrumps
+  version: {{ version | replace("-", "_") }}
 
 build:
   number: 0
@@ -17,18 +17,27 @@ source:
 
 requirements:
   build:
-    - wget
-    - r-essentials 
-    - r-devtools
-    - r-ape
-    - r-optparse 
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+    - {{ compiler('c') }}              # [not win]
+    - {{ stdlib("c") }}                # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ stdlib("m2w64_c") }}          # [win]
+    - {{ compiler('cxx') }}            # [not win]
+    - {{ compiler('m2w64_cxx') }}      # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}make
+    - {{ posix }}sed               # [win]
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+  host:
+    - r-base
   run:
-    - r-essentials 
-    - r-ape
-    - r-optparse
+    - r-base
+    
 test:
   commands:
-    - r-grumps --help
+    - $R -e "library('rgrumps')"           # [not win]
+    - "\"%R%\" -e \"library('rgrumps')\""  # [win]
 
 about:
   summary: Genomic distance based Rapid Uncovering of Microbial Population Structures
