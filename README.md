@@ -15,7 +15,7 @@ https://doi.org/10.1101/2022.12.19.521123
 
 `grumps` is installable from conda, pip or from source. 
 
-The best installation method for `grumps` is conda within a new environment. 
+The best installation method for `grumps` is conda within a new environment. Currently `grumps` and `r-grumps` are only available on conda for Linux and MacOSX.
 
 ### Installing from conda
 #### Creating a new environment
@@ -73,7 +73,6 @@ In order to get the CLI entrypoint for the R package, simply download the Rscrip
 * ape
 * grDevices
 * RColorBrewer
-* sparcl
 * stats
 * utils
 
