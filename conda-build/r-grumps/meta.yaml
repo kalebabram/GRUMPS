@@ -3,7 +3,7 @@
 {% set native = 'm2w64-' if win else '' %}
 
 package:
-  name: rgrumps
+  name: r-grumps
   version: {{ version | replace("-", "_") }}
 
 build:
@@ -13,37 +13,26 @@ build:
     - lib/
 
 source:
-  url: https://raw.githubusercontent.com/kalebabram/r-grumps/main/LICENSE
-  fn: LICENSE
   url: https://github.com/kalebabram/r-grumps/raw/main/rgrumps_{{ version }}.tar.gz
-  sha256: 85e65e12c69c0ba4989dfd8faacd625d311922fa
-  url: https://raw.githubusercontent.com/kalebabram/r-grumps/main/cligrumps.R
-  fn: cligrumps.R
+  sha256: 5c57cfb915b095ed6c307baf0e378269ac5bddfe7e5de362e8e32304965adad8 
 
 requirements:
-  build:
-    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
-    - {{ compiler('c') }}              # [not win]
-    - {{ stdlib("c") }}                # [not win]
-    - {{ compiler('m2w64_c') }}        # [win]
-    - {{ stdlib("m2w64_c") }}          # [win]
-    - {{ compiler('cxx') }}            # [not win]
-    - {{ compiler('m2w64_cxx') }}      # [win]
-    - {{ posix }}filesystem        # [win]
-    - {{ posix }}make
-    - {{ posix }}sed               # [win]
-    - {{ posix }}coreutils         # [win]
-    - {{ posix }}zip               # [win]
   host:
-    - r-base
+    - wget
+    - r-base >=4.4.1
+    - r-ape
+    - r-MASS
+    - r-RColorBrewer
   run:
-    - r-base
-    
+    - r-base >=4.4.1
+    - r-ape
+    - r-optparse
+    - r-MASS
+    - r-RColorBrewer
+
 test:
   commands:
-    - $R -e "library('rgrumps')"           # [not win]
-    - "\"%R%\" -e \"library('rgrumps')\""  # [win]
-
+    - r-grumps -h
 about:
   summary: Genomic distance based Rapid Uncovering of Microbial Population Structures
   license: Apache-2.0
