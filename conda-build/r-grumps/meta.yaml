@@ -1,0 +1,45 @@
+{% set version = "1.0.1" %}
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: r-grumps
+  version: {{ version | replace("-", "_") }}
+
+build:
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+source:
+  url: https://github.com/kalebabram/r-grumps/raw/main/rgrumps_{{ version }}.tar.gz
+  sha256: 5c57cfb915b095ed6c307baf0e378269ac5bddfe7e5de362e8e32304965adad8 
+
+requirements:
+  host:
+    - wget
+    - r-base >=4.4.1
+    - r-ape
+    - r-MASS
+    - r-RColorBrewer
+  run:
+    - r-base >=4.4.1
+    - r-ape
+    - r-optparse
+    - r-MASS
+    - r-RColorBrewer
+
+test:
+  commands:
+    - r-grumps -h
+about:
+  summary: Genomic distance based Rapid Uncovering of Microbial Population Structures
+  license: Apache-2.0
+  license_file: LICENSE
+  license_family: APACHE
+  license_url: https://github.com/kalebabram/r-grumps/blob/main/LICENSE
+
+extra:
+  recipe-maintainers:
+    - kalebabram

@@ -1,13 +1,19 @@
 name: grumps
 channels:
   - conda-forge
-  - r
+  - kabram
+
 dependencies:
-  - python=3.7.1
+  - python
   - networkx
   - pandas
   - scipy
+  - numpy
   - seaborn
-  - r-essentials=3.6.0
+  - scikit-learn
+  - r-essentials
+  - r-devtools
   - r-optparse
-  - r-sparcl
+  - r-ape
+  - py-grumps
+  - r-grumps

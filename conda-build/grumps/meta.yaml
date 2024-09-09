@@ -1,0 +1,20 @@
+{% set name = 'grumps' %}
+{% set version = "1.0.1" %}
+
+package:
+  name: {{ name }} 
+  version: {{ version }}
+
+build:
+  number: 0
+
+requirements:
+  run:
+    - py-grumps
+    - r-grumps
+
+test:
+  commands:
+    - grumps --help
+    - r-grumps -h
+    - distmat_converter --help

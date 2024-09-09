@@ -1,0 +1,63 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "grumps"
+description = "Genomic distance based Rapid Uncovering of Microbial Population Structures"
+authors = [
+    {name = "Kaleb Abram", email = "abram.kaleb@gmail.com"},
+]
+maintainers = [
+    {name = "Kaleb Abram", email = "abram.kaleb@gmail.com"},
+]
+
+requires-python = ">=3.7"
+dependencies = [
+    "scikit-learn",
+    "scipy",
+    "seaborn",
+    "pandas",
+    "numpy",
+    "pandas",
+    "networkx",
+]
+
+dynamic = ["version"]
+readme = "src/grumps/README.md"
+license = {file = "LICENSE"}
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: MacOS :: MacOS X",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Framework :: Hatch",
+]
+keywords = [
+    "genome",
+    "clustering",
+    "population structure",
+    "ANI",
+    "mash",
+    "machine learning",
+    "data cleaning",
+]
+
+[project.urls]
+Homepage = "https://github.com/kalebabram/grumps"
+News = "https://github.com/kalebabram/grumps/blob/master/CHANGELOG.md"
+Readme = "https://github.com/kalebabram/grumps/blob/master/README.md"
+Issues = "https://github.com/kalebabram/GRUMPS/issues"
+
+[project.scripts]
+grumps = "grumps.core.cli:cli"
+distmat_converter = "grumps.core.distmat_converter:main"
+
+[tool.hatch.version]
+path = "src/grumps/__about__.py"
+
