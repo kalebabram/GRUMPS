@@ -72,7 +72,6 @@ In order to get the CLI entrypoint for the R package, simply download the Rscrip
 `r-grumps` utilizes the following R libraries:
 * MASS
 * optparse
-* ape
 * grDevices
 * RColorBrewer
 * stats
