@@ -1,4 +1,6 @@
 # GRUMPS
+[![Anaconda-Server Badge](https://anaconda.org/kabram/grumps/badges/version.svg)](https://anaconda.org/kabram/grumps)[![Anaconda-Server Badge](https://anaconda.org/kabram/grumps/badges/latest_release_date.svg)](https://anaconda.org/kabram/grumps)
+
 ***G***enomic distance based ***R***apid ***U***ncovering of ***M***icrobial ***P***opulation ***S***tructures.
 
 `grumps` is designed to assist and speed up the construction of species level population structures using Mash distances as an input. ANI values can be used as well if the ANI values are converted to a decimal difference value {i.e. (100 - ANIvalue) /100}. Additional helper scripts are provided if you do not have a correctly formatted distance matrix to input.
