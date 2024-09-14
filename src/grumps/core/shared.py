@@ -5,21 +5,27 @@ from scipy.cluster.hierarchy import linkage, fcluster
 
 ### functions shared by regular and strict modes
 def outlierFiller(grumpsObj):
-	from pandas import concat, Series
+	from pandas import concat, DataFrame
 	outlierSize = round(len(grumpsObj.distMat) * .05) + 2
 	aboveCutoff = grumpsObj.cutOff * 1.02
 	outlierSim = grumpsObj.cutOff/10
 	outlierList = [aboveCutoff]*len(grumpsObj.distMat)
-	outlierDict = dict()
 	loopList = [outlierSim] * outlierSize
+	tempDF1 = DataFrame()
+	indexList = list(grumpsObj.distMat.columns)
 	for val in range(1,outlierSize+1):
-		grumpsObj.distMat['outlier_' + str(val)] = outlierList
+		tempDF1['outlier_' + str(val)] = outlierList
+	tempDF1.index = indexList
+	tempDF1 = tempDF1.T
+	grumpsObj.distMat = concat([grumpsObj.distMat,tempDF1])
+	tempDF2 = pd.DataFrame()
 	for val in range(0,outlierSize):
 		subloopList = loopList[:]
 		subloopList[val] = 0
-		outlierDict['outlier_' + str(val+1)] = Series((outlierList + subloopList), index = grumpsObj.distMat.columns)
-	outlierDF = DataFrame(outlierDict).T
-	grumpsObj.distMat = concat([grumpsObj.distMat,outlierDF])
+		indexList.append('outlier_' + str(val))
+		tempDF2['outlier_' + str(val+1)] = outlierList + subloopList
+	tempDF2.index = indexList
+	grumpsObj.distMat = concat([grumpsObj.distMat,tempDF2],axis=1)
 
 def outlierCountBuilder(grumpsObj):
 	funcDict = dict()
