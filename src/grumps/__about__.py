@@ -1,4 +1,4 @@
 """Metadata"""
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 __author__ = ("Kaleb Abram")
-__date__ = "Sep. 3 2024"
+__date__ = "Sep. 14 2024"
