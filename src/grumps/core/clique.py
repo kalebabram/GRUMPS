@@ -63,16 +63,22 @@ def outlierFiller(grumpsObj,distMat):
 	aboveCutoff = grumpsObj.cutOff * 1.02
 	outlierSim = grumpsObj.cutOff/10
 	outlierList = [aboveCutoff]*len(distMat)
-	outlierDict = dict()
 	loopList = [outlierSim] * outlierSize
+	tempDF1 = DataFrame()
+	indexList = list(distMat.columns)
 	for val in range(1,outlierSize+1):
-		distMat['outlier_' + str(val)] = outlierList
+		tempDF1['outlier_' + str(val)] = outlierList
+	tempDF1.index = indexList
+	tempDF1 = tempDF1.T
+	distMat = concat([distMat, tempDF1])
+	tempDF2 = pd.DataFrame()
 	for val in range(0,outlierSize):
 		subloopList = loopList[:]
 		subloopList[val] = 0
-		outlierDict['outlier_' + str(val+1)] = Series((outlierList + subloopList), index = distMat.columns)
-	outlierDF = DataFrame(outlierDict).T
-	distMat = concat([distMat,outlierDF])
+		indexList.append('outlier_' + str(val))
+		tempDF2['outlier_' + str(val+1)] = outlierList + subloopList
+	tempDF2.index = indexList
+	distMat = concat([distMat,tempDF2])
 	return distMat
 
 def medoidGraphCleaner(grumpsObj, aGraphDict):
