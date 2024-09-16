@@ -20,8 +20,9 @@ To update `r-grumps` via conda: `conda update kabram::r-grumps`
 
 To update `r-grumps` via R: `R -e "devtools::install_github('kalebabram/r-grumps')"`
 ### Changed
- - fixed clique mode when ran with medoid cleaning to properly account for disconnected nodes as not their own clique
  - tweaked outlier addition function to be more efficient
+### Fixed
+ - fixed `clique` mode when ran with medoid cleaning to properly account for disconnected nodes as not their own clique
 
 ## [1.0.1] - 2024-09-03
 
