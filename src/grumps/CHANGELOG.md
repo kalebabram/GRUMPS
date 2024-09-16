@@ -8,7 +8,7 @@ Full integration of GitHub with PyPI and conda
  - neccessary files/configs to cause new releases of `grumps` to automatically
    build and upload to pip and conda
 
-## [1.0.1] - 2024-09-03
+## [1.0.3] - 2024-09-16
 #### `grumps`
 To update `grumps` via conda: `conda update kabram::grumps`
 
@@ -19,7 +19,18 @@ To update `py-grumps` via conda: `conda update kabram::py-grumps`
 To update `r-grumps` via conda: `conda update kabram::r-grumps`
 
 To update `r-grumps` via R: `R -e "devtools::install_github('kalebabram/r-grumps')"`
- 
+### Changed
+ - mirrored outlier optimizations to `clique` mode version
+
+## [1.0.2] - 2024-09-14
+
+### Changed
+ - tweaked outlier addition function to be more efficient
+### Fixed
+ - fixed `clique` mode when ran with medoid cleaning to properly account for disconnected nodes as not their own clique
+
+## [1.0.1] - 2024-09-03
+
 ### Added
  - conda install compatability
  - pip install compatability
