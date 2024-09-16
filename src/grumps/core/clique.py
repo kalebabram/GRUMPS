@@ -75,7 +75,7 @@ def outlierFiller(grumpsObj,distMat):
 	for val in range(0,outlierSize):
 		subloopList = loopList[:]
 		subloopList[val] = 0
-		indexList.append('outlier_' + str(val))
+		indexList.append('outlier_' + str(val+1))
 		tempDF2['outlier_' + str(val+1)] = outlierList + subloopList
 	tempDF2.index = indexList
 	distMat = concat([distMat,tempDF2])
