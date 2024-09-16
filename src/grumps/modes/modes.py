@@ -64,7 +64,7 @@ def cliqueMode(grumpsObj):
 	# run medoid based cleaning
 	if grumpsObj.medoid == 'yes':
 		#grumpsObj.settingString = grumpsObj.settingString + '_' + 'medoid_filt'
-		from grumps.core.clique import graphStatFunction, dictMerge, kmeansSil, outlierFiller, medoidGraphCleaner
+		from grumps.core.clique import graphStatFunction, dictMerge, kmeansSil, outlierFiller, medoidGraphCleaner, trimmedGraphMedoidChecker
 		grumpsObj.trimmedGraph, grumpsObj.untrimmedNodes = medoidGraphCleaner(grumpsObj, grumpsObj.trimmedGraph)
 		while len(grumpsObj.untrimmedNodes) > 1:
 			graphBuilder(grumpsObj, grumpsObj.untrimmedNodes)
