@@ -78,7 +78,7 @@ def outlierFiller(grumpsObj,distMat):
 		indexList.append('outlier_' + str(val+1))
 		tempDF2['outlier_' + str(val+1)] = outlierList + subloopList
 	tempDF2.index = indexList
-	distMat = concat([distMat,tempDF2])
+	distMat = concat([distMat,tempDF2], axis=1)
 	return distMat
 
 def medoidGraphCleaner(grumpsObj, aGraphDict):
