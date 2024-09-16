@@ -64,19 +64,21 @@ def outlierFiller(grumpsObj,distMat):
 	outlierSim = grumpsObj.cutOff/10
 	outlierList = [aboveCutoff]*len(distMat)
 	loopList = [outlierSim] * outlierSize
-	tempDF1 = DataFrame()
+	outlierDict = dict()
 	indexList = list(distMat.columns)
 	for val in range(1,outlierSize+1):
-		tempDF1['outlier_' + str(val)] = outlierList
+		outlierDict['outlier_' + str(val)] = outlierList
+	tempDF1 = DataFrame(outlierDict)
 	tempDF1.index = indexList
 	tempDF1 = tempDF1.T
 	distMat = concat([distMat, tempDF1])
-	tempDF2 = DataFrame()
+	outlierDict = dict()
 	for val in range(0,outlierSize):
 		subloopList = loopList[:]
 		subloopList[val] = 0
 		indexList.append('outlier_' + str(val+1))
-		tempDF2['outlier_' + str(val+1)] = outlierList + subloopList
+		outlierDict['outlier_' + str(val+1)] = outlierList + subloopList
+	tempDF2 = pd.DataFrame(outlierDict)
 	tempDF2.index = indexList
 	distMat = concat([distMat,tempDF2], axis=1)
 	return distMat
