@@ -73,6 +73,8 @@ def cliqueMode(grumpsObj):
 			dictMerge(grumpsObj.trimmedGraph, grumpsObj.graphDict)
 			if len(grumpsObj.untrimmedNodes) == 1:
 				grumpsObj.unconnectedNodes.extend(grumpsObj.untrimmedNodes)
+		# run the trimmedGraph medoid checker
+		trimmedGraphMedoidChecker(grumpsObj)
 	# write out the cliques
 	cliqueWriter(grumpsObj)
 
