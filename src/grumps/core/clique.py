@@ -71,7 +71,7 @@ def outlierFiller(grumpsObj,distMat):
 	tempDF1.index = indexList
 	tempDF1 = tempDF1.T
 	distMat = concat([distMat, tempDF1])
-	tempDF2 = pd.DataFrame()
+	tempDF2 = DataFrame()
 	for val in range(0,outlierSize):
 		subloopList = loopList[:]
 		subloopList[val] = 0
