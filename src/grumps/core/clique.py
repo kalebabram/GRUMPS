@@ -123,6 +123,18 @@ def medoidGraphCleaner(grumpsObj, aGraphDict):
 			rerunList.extend(x)
 	return keepDict,rerunList
 
+def trimmedGraphMedoidChecker(grumpsObj):
+	i = 1
+	unconnectedList = []
+	connectedDict = dict()
+	for aKey in grumpsObj.trimmedGraph.keys():
+		if len(grumpsObj.trimmedGraph[aKey]) >1:
+			connectedDict['clique_' + str(i)] = grumpsObj.trimmedGraph[aKey]
+			i+=1
+		else:
+			unconnectedList.extend(grumpsObj.trimmedGraph[aKey])
+	grumpsObj.unconnectedNodes.extend(unconnectedList)
+	grumpsObj.trimmedGraph = connectedDict
 
 def cliqueWriter(grumpsObj):
 	stringy = grumpsObj.mode + '_' + str(grumpsObj.cutOff)
