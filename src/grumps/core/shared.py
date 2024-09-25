@@ -42,8 +42,8 @@ def outlierCountBuilder(grumpsObj):
 	for col in funcDF:
 		funcSeries = funcDF[col]
 		statDict[col] = funcSeries.value_counts()
-		grumpsObj.outliercountDF = DataFrame(statDict)
-		grumpsObj.outliercountDF = grumpsObj.outliercountDF.T
+	grumpsObj.outliercountDF = DataFrame(statDict)
+	grumpsObj.outliercountDF = grumpsObj.outliercountDF.T
 
 def sizeChecker(clustList):
 	if 2 not in clustList:
